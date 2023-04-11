@@ -6,20 +6,19 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Vibrant - News</title>
  <link rel="stylesheet" href="styles.css">
+ <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+ <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
  <style>
-  .center { padding-top: 2%; }
-  .section { display: grid; grid-template-columns: 170px 1fr; gap: 30px; }
+  #np-news-section { margin: 0 auto; max-width: 1500px; }
   .link { margin: 17px 0 17px auto; }
-  .news-info h2 { margin-bottom: 5px; }
-  .news-info p { font-size: 14px; }
  </style>
 </head>
 <body>
  <div class="header">
-  <div>
+  <div id="logo-container">
    <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
   </div>
-  <div class="navigation-bar">
+  <div id="navigation-bar">
    <ul>
     <li><a href="/shows.html">Shows</a>
     </li>
@@ -33,59 +32,20 @@
     </li>
    </ul>
   </div>
-  <div class="search">
+  <div id="search">
    <input type="text" name="search" id="" placeholder="Search series">
    <button type="submit">Search</button>
   </div>
  </div>
  <div class="center">
- <h1 style="text-align: center;">Vibrant News, the latest anime and manga news!</h1>
- <h3>Top Stories</h3>
- <div class="section"></div>
- <a href="https://www.crunchyroll.com/news/" class="link">More News</a>
+   <h1 style="text-align: center;">Vibrant News, the latest anime and manga news!</h1>
+   <div id="np-news-section">
+    <h3>Top Stories</h3>
+    <div id="news-stories"></div>
+    <a href="https://www.crunchyroll.com/news/" class="link" target="_blank" style="display: block;">More News</a>
+   </div>
  </div>
  <p style="font-size: 14px; text-align: center; margin-top: 20px;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
 </body>
-<script>
- fetch('newsarticles.json')
-    .then((response) => response.json())
-    .then((json) => displayNews(json))
-
- const newsList = document.querySelector('.section')
- function displayNews(objArr) {
-    for (const article of objArr) {
-        const tile = document.createElement('div')
-        newsList.appendChild(tile)
-        tile.setAttribute('class', 'news-img')
-        const img = document.createElement('img')
-        tile.appendChild(img)
-        img.setAttribute('src', article["urlToImage"])
-        img.width = 170
-
-        const row = document.createElement('div')
-        const h2 = document.createElement('h2');
-        const anchor = document.createElement('a')
-        const subTitle = document.createElement('p')
-        const pubDate = document.createElement('p')
-
-        newsList.appendChild(row)
-        row.setAttribute('class', 'news-info')
-        anchor.setAttribute('href', article["url"])
-        anchor.textContent = article["title"]
-        h2.appendChild(anchor)
-        h2.style.marginBlockStart = 0
-        subTitle.textContent = article["description"]
-        
-        const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
-        const dateStr = theDay[0]
-        const newDateStr = new Date(dateStr)
-        const options = { month: 'long', day: 'numeric', year: 'numeric' };
-        const formattedDate = newDateStr.toLocaleDateString('en-US', options);
-        pubDate.textContent = formattedDate
-        pubDate.style.fontStyle = 'italic'
-
-        row.append(h2, subTitle, pubDate)
-    }
- }
-</script>
+<script src="functions.js" type="module"></script>
 </html>
