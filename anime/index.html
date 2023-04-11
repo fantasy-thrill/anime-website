@@ -6,14 +6,18 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Vibrant, Jump Into It</title>
  <link rel="stylesheet" href="styles.css">
+ <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+ <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
 </head>
 <body>
  <header>
   <div class="header">
-   <div>
+   <div id="logo-container">
+    <i class="fa-solid fa-bars fa-xl"></i>
     <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
+    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
    </div>
-   <div class="navigation-bar">
+   <div id="navigation-bar">
     <ul>
      <li><a href="/shows.html">Shows</a>
      </li>
@@ -27,7 +31,7 @@
      </li>
     </ul>
    </div>
-   <div class="search">
+   <div id="search">
     <input type="text" name="search" id="" placeholder="Search series">
     <button type="submit">Search</button>
    </div>
@@ -35,64 +39,66 @@
  </header>
  <main>
   <div id="banner-ad">
-    <h1 style="font-size: 60px;">Vibrant is your custom home for the latest popular anime series!</h1>
-    <p style="font-size: 30px;">Stream our immense catalog now!</p>
+    <div id="banner-message">
+      <h1 style="font-size: 3.75em;">Vibrant is your custom home for the latest popular anime series!</h1>
+      <p style="font-size: 1.875em;">Stream our immense catalog now!</p>
+    </div>
    </div>
   <div class="center">
-   <h2>Most Popular</h2>
-   <hr>
    <div id="most-popular">
-    <div class="show-tile">
-     <a href="https://www.crunchyroll.com/chainsaw-man"><img src="/images/chainsaw_man.jpe" alt="Chainsaw Man"></a>
-    </div>
-    <div class="show-tile">
-      <a href="https://www.crunchyroll.com/my-hero-academia"><img src="/images/my_hero_academia_s6.jpe" alt="My Hero Academia"></a>
-    </div>
-    <div class="show-tile">
-      <a href="https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba"><img src="/images/demon_slayer_tv.jpe" alt="Demon Slayer"></a>
-    </div>
-    <div class="show-tile">
-      <a href="https://www.crunchyroll.com/mob-psycho-100"><img src="/images/mob_psycho_100_s3.jpe" alt="Mob Psycho 100"></a>
+    <h2>Most Popular</h2>
+    <hr>
+    <div id="mp-show-tiles"></div>
+    <div id="featured-anime2">
+      <div class="anime-img">
+        <img src="/images/dr-stone.jpe" alt="Dr. Stone">
+      </div>
+      <div class="anime-description">
+        <h2>Dr. Stone</h2>
+        <p>Several thousand years after a mysterious phenomenon that turns all of humanity to stone, the extraordinarily intelligent, science-driven boy, Senku Ishigami, awakens. Facing a world of stone and the total collapse of civilization, Senku makes up his mind to use science to rebuild the world. Starting with his super strong childhood friend Taiju Oki, who awakened at the same time, they will begin to rebuild civilization from nothing.</p>
+        <a href="https://www.crunchyroll.com/series/GYEXQKJG6/dr-stone" class="watch-now-btn" target="_blank">Watch Now</a>
+      </div>
+      <div class="anime-img">
+        <img src="/images/mashle.jpe" alt="Mashle: Magic and Muscles">
+      </div>
+      <div class="anime-description">
+        <h2>Mashle: Magic and Muscles</h2>
+        <p>This is a world of magic. This is a world in which magic is casually used by everyone. In a deep, dark forest in this world of magic, there is a boy who is singlemindedly working out. His name is Mash Burnedead, and he has a secret. He can’t use magic.</p>
+        <p>All he wanted was to live a quiet life with his family, but people suddenly start trying to kill him one day and he somehow finds himself enrolled in Magic School. There, he sets his sights on becoming a “Divine Visionary,” the elite of the elite. Will his ripped muscles work against the best and brightest of the wizarding world?</p>
+        <a href="https://www.crunchyroll.com/series/GDKHZEP8W/mashle-magic-and-muscles" class="watch-now-btn" target="_blank">Watch Now</a>
+      </div>
     </div>
    </div>
    <div id="featured-anime">
     <h2>Featured Anime</h2>
     <hr>
-    <h3>My Hero Academia</h3>
-    <img src="/images/my_hero_academia_s6.jpe" alt="My Hero Academia" width="70%" style="margin: 0 15%;">
-    <p>Izuku has dreamt of being a hero all his life—a lofty goal for anyone, but especially challenging for a kid with no superpowers. That’s right, in a world where eighty percent of the population has some kind of super-powered “quirk,” Izuku was unlucky enough to be born completely normal. But that’s not enough to stop him from enrolling in one of the world’s most prestigious hero academies.</p>
-    <h3><a href="https://www.crunchyroll.com/series/G6NQ5DWZ6/my-hero-academia" target="_blank">Watch Now</a></h3>
-    <br>
-    <h3>Vinland Saga</h3>
-    <img src="/images/vinland_saga.jpe" alt="Vinland Saga" width="70%" style="margin: 0 15%;">
-    <p>Around the end of the millennium, Viking, the mightiest but atrocious tribe, had been out breaking everywhere. Thorfinn, the son of the greatest warrior, lived his childhood in the battlefield. He was seeking the land of reverie called Vinland. This is the story of a true warrior in an age of turmoil.</p>
-    <h3><a href="https://www.crunchyroll.com/series/GEXH3WKK0/vinland-saga" target="_blank">Watch Now</a></h3>
-    <a href="/shows.html" class="link">More Shows</a>
-   </div>
-   <br>
-   <h2>Check out the latest news!</h2>
-   <hr>
-   <div class="news-section">
-    <div>
-     <img src="https://img1.ak.crunchyroll.com/i/spire4/e0b6ea6bfa7459e5b449a8b62473a71c1674453127_thumb.png" alt="thorfinn">
+    <div id="featured-anime-subsection">
+      <h3>Demon Slayer: Kimetsu no Yaiba</h3>
+      <img src="/images/demon_slayer_tv.jpe" alt="Demon Slayer" width="70%" style="margin: 0 15%;">
+      <p>It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.</p>
+      <p>Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.</p>
+      <div class="options">
+        <a href="https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba" target="_blank" class="link">Watch Now</a>
+        <a href="/shows.html" class="link">More Shows</a>
+      </div>
     </div>
-   <div>
-    <h2><a href="https://www.crunchyroll.com/anime-news/2023/01/23-1/vinland-saga-season-2-english-dub-reveals-cast-crew-release-date">Vinland Saga Season 2 English Dub Reveals Cast & Crew, Release Date</a></h2>
-    <p><em>January 23, 2023</em></p>
    </div>
-   <div>
-    <img src="https://img1.ak.crunchyroll.com/i/spire3/c0afc271c365025f4c06157f404bf9ab1674486832_thumb.jpg" alt="ragnarok">
-   </div>
-   <div>
-    <h2><a href="https://www.crunchyroll.com/anime-news/2023/01/23/record-of-ragnarok-ii-anime-lets-fiery-fists-fly-in-subtitled-trailer">Record of Ragnarok II Anime Lets Fiery Fists Fly in Subtitled Trailer</a></h2>
-    <p><em>January 23, 2023</em></p>
+   <div id="news-section">
+    <h2>Check out the latest news!</h2>
+    <hr>
+    <div id="top-stories"></div>
+    <a href="/news.html" class="link" id="more-news-btn">More News</a>
    </div>
   </div>
-  <a href="/news.html" class="link">More News</a>
- </div>
  </main>
  <footer>
   <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
  </footer>
+ <!-- <script src="data.js"></script> -->
+ <script src="functions.js" type="module"></script>
+ <script type="module">
+  import { displayMostPopularAnime } from "/functions.js"
+  displayMostPopularAnime()
+ </script>
 </body>
 </html>
