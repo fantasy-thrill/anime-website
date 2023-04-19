@@ -13,9 +13,9 @@
  <header>
   <div class="header">
    <div id="logo-container">
-    <i class="fa-solid fa-bars fa-xl"></i>
+    <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
     <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
-    <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+    <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
    </div>
    <div id="navigation-bar">
     <ul>
@@ -48,7 +48,9 @@
    <div id="most-popular">
     <h2>Most Popular</h2>
     <hr>
-    <div id="mp-show-tiles"></div>
+    <div id="mp-show-tiles">
+      <!-- List of currently most popular anime goes here -->
+    </div>
     <div id="featured-anime2">
       <div class="anime-img">
         <img src="/images/dr-stone.jpe" alt="Dr. Stone">
@@ -86,7 +88,9 @@
    <div id="news-section">
     <h2>Check out the latest news!</h2>
     <hr>
-    <div id="top-stories"></div>
+    <div id="top-stories">
+      <!-- The two top news stories go here -->
+    </div>
     <a href="/news.html" class="link" id="more-news-btn">More News</a>
    </div>
   </div>
@@ -94,11 +98,12 @@
  <footer>
   <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
  </footer>
- <!-- <script src="data.js"></script> -->
  <script src="functions.js" type="module"></script>
  <script type="module">
-  import { displayMostPopularAnime } from "/functions.js"
+  import { displayMostPopularAnime, toggleImageWidth } from "/functions.js"
   displayMostPopularAnime()
+  toggleImageWidth(".show-tile")
+  toggleImageWidth(".anime-img")
  </script>
 </body>
 </html>
