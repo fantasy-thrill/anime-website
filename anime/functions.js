@@ -1,5 +1,26 @@
 import { mostPopularList, currentAnimeList } from "/data.js"
 
+function mobileBarFunc() {
+  const menuIcon = document.getElementById("menu-icon")
+  const searchIcon = document.getElementById("search-icon")
+  const navBar = document.getElementById("navigation-bar")
+  const searchBar = document.getElementById("search")
+  menuIcon.addEventListener("click", () =>  {
+    navBar.classList.toggle("displayed")
+    if (searchBar.classList.contains("displayed")) {
+      searchBar.classList.remove("displayed")
+    }
+  })
+  searchIcon.addEventListener("click", () => {
+    searchBar.classList.toggle("displayed")
+    if (navBar.classList.contains("displayed")) {
+      navBar.classList.remove("displayed")
+    }
+  })
+}
+
+mobileBarFunc()
+
 // Script for "Most Popular" section on home page
 export function displayMostPopularAnime() {
   const mostPopular = document.getElementById('mp-show-tiles')
@@ -10,10 +31,34 @@ export function displayMostPopularAnime() {
    mostPopular.appendChild(anchor)
    const animeImg = document.createElement('img')
    anchor.appendChild(animeImg)
-   animeImg.setAttribute('src', anime["horizontalImg"])
+   if (window.innerWidth < 1000) {
+    animeImg.setAttribute('src', anime["verticalImg"])
+   } else {
+    animeImg.setAttribute('src', anime["horizontalImg"])
+   }
    animeImg.setAttribute('alt', anime["name"])
   }
  }
+
+// Function for alternating between portrait and landscape images
+export function toggleImageWidth(className) {
+  const titles = document.querySelectorAll(className)
+  const mediaQuery = window.matchMedia('(max-width: 1000px)')
+  for (const title of titles) {
+    const animeImg = title.querySelector('img')
+    for (const anime of currentAnimeList) {
+      if (animeImg.alt === anime["name"]) {
+        mediaQuery.addEventListener('change', (event) => {
+          if (event.matches) {
+            animeImg.src = anime["verticalImg"]
+          } else {
+            animeImg.src = anime["horizontalImg"]
+          }
+        })
+      }
+    }
+  } 
+}
 
 // Script for news section on home page
 fetch('homepagetopstories.json')
