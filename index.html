@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Vibrant, Jump Into It</title>
+ <link rel="stylesheet" href="styles.css">
+ <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+ <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
+</head>
+<body>
+ <header>
+  <div class="header">
+   <div id="logo-container">
+    <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
+    <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
+    <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
+   </div>
+   <div id="navigation-bar">
+    <ul>
+     <li><a href="/shows.html">Shows</a>
+     </li>
+     <li><a href="/news.html">News</a>
+     </li>
+     <li><a href="/shop.html">Shop</a>
+     </li>
+     <li><a href="/about_us.html">About Us</a>
+     </li>
+     <li><a href="/contact.html">Contact</a>
+     </li>
+    </ul>
+   </div>
+   <div id="search">
+    <input type="text" name="search" id="" placeholder="Search series">
+    <button type="submit">Search</button>
+   </div>
+  </div>
+ </header>
+ <main>
+  <div id="banner-ad">
+    <div id="banner-message">
+      <h1 style="font-size: 3.75em;">Vibrant is your custom home for the latest popular anime series!</h1>
+      <p style="font-size: 1.875em;">Stream our immense catalog now!</p>
+    </div>
+   </div>
+  <div class="center">
+   <div id="most-popular">
+    <h2>Most Popular</h2>
+    <hr>
+    <div id="mp-show-tiles">
+      <!-- List of currently most popular anime goes here -->
+    </div>
+    <div id="suggestions">
+      <!-- Extra suggestions of anime goes here -->
+    </div>
+   </div>
+   <div id="featured-anime">
+    <h2>Featured Anime</h2>
+    <hr>
+    <div id="featured-anime-subsection">
+      <h3>Demon Slayer: Kimetsu no Yaiba</h3>
+      <img src="/images/Horizontal Images/demon_slayer_tv.jpe" alt="Demon Slayer" width="70%" style="margin: 0 15%;">
+      <p>It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.</p>
+      <p>Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.</p>
+      <div class="options">
+        <a href="https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba" target="_blank" class="link">Watch Now</a>
+        <a href="/shows.html" class="link">More Shows</a>
+      </div>
+    </div>
+   </div>
+   <div id="news-section">
+    <h2>Check out the latest news!</h2>
+    <hr>
+    <div id="top-stories">
+      <!-- The two top news stories go here -->
+    </div>
+    <a href="/news.html" class="link" id="more-news-btn">More News</a>
+   </div>
+  </div>
+ </main>
+ <footer>
+  <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
+ </footer>
+ <script src="functions.js" type="module"></script>
+ <script type="module">
+  import { displayMostPopularAnime, toggleImageWidth, displaySuggestedSeries } from "/functions.js"
+  import data from "/data.js"
+  const mostPopularList = data.mostPopularList
+  const suggestedSeries = data.suggestedSeries
+
+  displayMostPopularAnime()
+  displaySuggestedSeries()
+  toggleImageWidth(".show-tile")
+  toggleImageWidth(".anime-img")
+ </script>
+</body>
+</html>

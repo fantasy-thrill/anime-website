@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>News JSON</title>
+ <style>
+    body {
+     font-size: 20px;
+     margin-left: 50px;
+    }
+ </style>
+</head>
+<body>
+</body>
+<script>
+ //const para = document.querySelector('p')
+ const page = document.querySelector('body')
+ var url = 'https://newsapi.org/v2/everything?' + 'domains=crunchyroll.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
+ var req = new Request(url);
+ fetch(req)
+    .then((response) => response.json())
+    .then((json) => {
+        console.log(json);
+        console.log(JSON.stringify(json, null, 2, (key, value) => value === undefined ? null : value));
+        const newsList = json["articles"]
+        for (const article of newsList) {
+            const para = document.createElement("p");
+            para.textContent = article["title"]
+            page.appendChild(para)
+        }
+    })
+
+</script>
+</html>
