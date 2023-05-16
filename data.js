@@ -101,6 +101,87 @@ addAnime(
  "no"
 )
 
+addAnime(
+  "Black Clover",
+  "images/Vertical Images/BC.jpg",
+  "images/Horizontal Images/black-clover.jpg",
+  "In a world where magic is everything, Asta and Yuno are both found abandoned at a church on the same day. While Yuno is gifted with exceptional magical powers, Asta is the only one in this world without any. At the age of fifteen, both receive grimoires, magic books that amplify their holder’s magic. Asta’s is a rare Grimoire of Anti-Magic that negates and repels his opponent’s spells. Being opposite but good rivals, Yuno and Asta are ready for the hardest of challenges to achieve their common dream: to be the Wizard King. Giving up is never an option!",
+  "https://www.crunchyroll.com/series/GRE50KV36/black-clover",
+  "no"
+)
+
+addAnime(
+  "Attack on Titan",
+  "images/Vertical Images/AOT.jpe",
+  "images/Horizontal Images/attack-on-titan.jpe",
+  "Many years ago, the last remnants of humanity were forced to retreat behind the towering walls of a fortified city to escape the massive, man-eating Titans that roamed the land outside their fortress. Only the heroic members of the Scouting Legion dared to stray beyond the safety of the walls – but even those brave warriors seldom returned alive. Those within the city clung to the illusion of a peaceful existence until the day that dream was shattered, and their slim chance at survival was reduced to one horrifying choice: kill – or be devoured!",
+  "https://www.crunchyroll.com/series/GR751KNZY/attack-on-titan",
+  "no"
+)
+
+addAnime(
+  "Boruto: Naruto Next Generations",
+  "images/Vertical Images/BORUTO.jpe",
+  "images/Horizontal Images/boruto-naruto-next-generations.jpe",
+  "As peace prevails throughout the ninja clans, so does the question of becoming one. Now a generation of prodigy like Boruto Uzumaki, son of Seventh Hokage Naruto Uzumaki, are challenged living under their parents’ shadow. The shinobi life has changed and so must the path to it. The legacy of ninja continues and a new chapter of ninja begins!",
+  "https://www.crunchyroll.com/series/GR75Q020Y/boruto-naruto-next-generations",
+  "no"
+)
+
+addAnime(
+  "Chainsaw Man",
+  "images/Vertical Images/CSM.jpg",
+  "images/Horizontal Images/chainsaw_man.jpe",
+  "Denji is a young boy who works as a Devil Hunter with the “Chainsaw Devil” Pochita. One day, as he was living his miserable life trying to pay off the debt he inherited from his parents, he got betrayed and killed. As he was losing his consciousness, he made a deal with Pochita, and got resurrected as the “Chainsaw Man”: the owner of the Devil’s heart.",
+  "https://www.crunchyroll.com/series/GVDHX8QNW/chainsaw-man",
+  "no"
+)
+
+addAnime(
+  "The Rising of the Shield Hero",
+  "images/Vertical Images/RSH.jpg",
+  "images/Horizontal Images/rising-of-the-shield-hero.jpg",
+  "Naofumi Iwatani, a run-of-the-mill otaku, finds a book in the library that summons him to another world. He is tasked with joining the sword, spear, and bow as one of the Four Cardinal Heroes and fighting the Waves of Catastrophe as the Shield Hero. Excited by the prospect of a grand adventure, Naofumi sets off with his party. However, merely a few days later, he is betrayed and loses all his money, dignity, and respect. Unable to trust anyone anymore, he employs a slave named Raphtalia and takes on the Waves and the world. But will he really find a way to overturn this desperate situation?",
+  "https://www.crunchyroll.com/series/G6W4QKX0R/the-rising-of-the-shield-hero",
+  "no"
+)
+
+addAnime(
+  "One Punch Man",
+  "images/Vertical Images/OPM.jpg",
+  "images/Horizontal Images/one-punch-man.png",
+  "Saitama looks like an average guy, but his problem is anything but average. After training hard enough for all his hair to fall out, he's become so overwhelmingly powerful that no villain can stop him. The thing is, Saitama just does the hero thing for fun. When every enemy goes down with a single punch, it turns out that overwhelming power can be kind of... boring. Can a hero be too strong?",
+  "https://www.hulu.com/series/one-punch-man-54a25fcf-a472-4d40-9968-13e2957e5abf",
+  "no"
+)
+
+addAnime(
+  "Naruto",
+  "images/Vertical Images/NARUTO.jpg",
+  "images/Horizontal Images/naruto.jpg",
+  "The Village Hidden in the Leaves is home to the stealthiest ninja. But twelve years earlier, a fearsome Nine-tailed Fox terrorized the village before it was subdued and its spirit sealed within the body of a baby boy.",
+  "https://www.crunchyroll.com/series/GY9PJ5KWR/naruto",
+  "no"
+)
+
+addAnime(
+  "Naruto Shippuden",
+  "images/Vertical Images/NARUTO-S.jpg",
+  "images/Horizontal Images/naruto-shippuden.jpg",
+  "Naruto Uzumaki wants to be the best ninja in the land. He's done well so far, but with the looming danger posed by the mysterious Akatsuki organization, Naruto knows he must train harder than ever and leaves his village for intense exercises that will push him to his limits.",
+  "https://www.crunchyroll.com/series/GYQ4MW246/naruto-shippuden",
+  "no"
+)
+
+addAnime(
+  "Fullmetal Alchemist: Brotherhood",
+  "images/Vertical Images/FMA.jpg",
+  "images/Horizontal Images/fullmetal-alchemist.jpg",
+  "Disregard for alchemy’s laws ripped half of Edward Elric’s limbs from his body and left Alphonse’s soul clinging to a suit of armor. To restore what was lost, the brothers seek the Philosopher’s Stone. Enemies and allies – the corrupt military, the Homunculi, and foreign alchemists – will alter the Elric’s course, but their purpose will remain unchanged and their bond unbreakable.",
+  "https://www.crunchyroll.com/series/GRGGPG93R/fullmetal-alchemist-brotherhood",
+  "no"
+)
+
 mostPopularList.pop()
 const myHero = mostPopularList.splice(0, 1)[0]
 mostPopularList.splice(2, 0, myHero)
@@ -123,6 +204,7 @@ for (const anime of currentAnimeList) {
  }
 }
 
+currentAnimeList.sort((a, b) => a.name.localeCompare(b.name))
 
 
 export default { mostPopularList, currentAnimeList, suggestedSeries }

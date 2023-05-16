@@ -52,21 +52,18 @@
       <!-- List of currently most popular anime goes here -->
     </div>
     <div id="suggestions">
-      <!-- Extra suggestions of anime goes here -->
+      <!-- Extra suggestions of anime go here -->
     </div>
    </div>
    <div id="featured-anime">
     <h2>Featured Anime</h2>
     <hr>
     <div id="featured-anime-subsection">
-      <h3>Demon Slayer: Kimetsu no Yaiba</h3>
-      <img src="/images/Horizontal Images/demon_slayer_tv.jpe" alt="Demon Slayer" width="70%" style="margin: 0 15%;">
-      <p>It is the Taisho Period in Japan. Tanjiro, a kindhearted boy who sells charcoal for a living, finds his family slaughtered by a demon. To make matters worse, his younger sister Nezuko, the sole survivor, has been transformed into a demon herself.</p>
-      <p>Though devastated by this grim reality, Tanjiro resolves to become a “demon slayer” so that he can turn his sister back into a human, and kill the demon that massacred his family.</p>
-      <div class="options">
-        <a href="https://www.crunchyroll.com/series/GY5P48XEY/demon-slayer-kimetsu-no-yaiba" target="_blank" class="link">Watch Now</a>
-        <a href="/shows.html" class="link">More Shows</a>
-      </div>
+      <!-- Featured anime series goes here -->
+    </div>
+    <div class="options">
+      <a href="" target="_blank" class="link">Watch Now</a>
+      <a href="/shows.html" class="link">More Shows</a>
     </div>
    </div>
    <div id="news-section">
@@ -80,11 +77,11 @@
   </div>
  </main>
  <footer>
-  <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
+  <p style="text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
  </footer>
  <script src="functions.js" type="module"></script>
  <script type="module">
-  import { displayMostPopularAnime, toggleImageWidth, displaySuggestedSeries } from "/functions.js"
+  import { displayMostPopularAnime, toggleImageWidth, displaySuggestedSeries, displayFeaturedAnime } from "/functions.js"
   import data from "/data.js"
   const mostPopularList = data.mostPopularList
   const suggestedSeries = data.suggestedSeries
@@ -93,6 +90,7 @@
   displaySuggestedSeries()
   toggleImageWidth(".show-tile")
   toggleImageWidth(".anime-img")
+  displayFeaturedAnime("Demon Slayer: Kimetsu no Yaiba")
  </script>
 </body>
 </html>

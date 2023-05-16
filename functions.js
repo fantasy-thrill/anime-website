@@ -4,6 +4,7 @@ const mostPopularList = data.mostPopularList
 const currentAnimeList = data.currentAnimeList
 const suggestedSeries = data.suggestedSeries
 
+// Function for responsive navigation bar
 function mobileBarFunc() {
   const menuIcon = document.getElementById("menu-icon")
   const searchIcon = document.getElementById("search-icon")
@@ -92,6 +93,29 @@ export function toggleImageWidth(className) {
       }
     }
   } 
+}
+
+export function displayFeaturedAnime(title) {
+  const subsection = document.getElementById("featured-anime-subsection")
+  const watchBtn = document.querySelector(".options a")
+
+  for (const anime of currentAnimeList) {
+    if (title === anime["name"]) {
+      const heading = document.createElement("h3")
+      heading.textContent = anime["name"]
+
+      const animeImg = document.createElement("img")
+      animeImg.setAttribute("src", anime["horizontalImg"])
+      animeImg.setAttribute("alt", anime["name"])
+      animeImg.style.width = "70%"
+
+      const description = document.createElement("p")
+      description.innerHTML = anime["description"]
+
+      watchBtn.setAttribute("href", anime["url"])
+      subsection.append(heading, animeImg, description)
+    }
+  }
 }
 
 // Script for news section on home page

@@ -1,55 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Vibrant - News</title>
- <link rel="stylesheet" href="styles.css">
- <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
- <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
- <style>
-  #np-news-section { margin: 0 auto; max-width: 1300px; }
-  .link { margin: 17px 0 17px auto; }
- </style>
-</head>
-<body>
- <div class="header">
-  <div id="logo-container">
-    <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
-    <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
-    <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
-  </div>
-  <div id="navigation-bar">
-   <ul>
-    <li><a href="/shows.html">Shows</a>
-    </li>
-    <li><a href="/news.html">News</a>
-    </li>
-    <li><a href="/shop.html">Shop</a>
-    </li>
-    <li><a href="/about_us.html">About Us</a>
-    </li>
-    <li><a href="/contact.html">Contact</a>
-    </li>
-   </ul>
-  </div>
-  <div id="search">
-   <input type="text" name="search" id="" placeholder="Search series">
-   <button type="submit">Search</button>
-  </div>
- </div>
- <div class="center">
-   <h1 style="text-align: center;">Vibrant News, the latest anime and manga news!</h1>
-   <div id="np-news-section">
-    <h3>Top Stories</h3>
-    <div id="news-stories">
-      <!-- List of news stories goes here -->
-    </div>
-    <a href="https://www.crunchyroll.com/news/" class="link" target="_blank" style="display: block;">More News</a>
-   </div>
- </div>
- <p style="font-size: 14px; text-align: center; margin-top: 20px;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
-</body>
-<script src="functions.js" type="module"></script>
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibrant - News</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
+    <style>
+      .center {
+        margin-top: 75px;
+      }
+      #np-news-section {
+        margin: 0 auto;
+        max-width: 1300px;
+      }
+      .link {
+        margin: 17px 0 17px auto;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <div id="logo-container">
+          <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
+          <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
+          <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
+        </div>
+        <div id="navigation-bar">
+          <ul>
+            <li><a href="/shows.html">Shows</a></li>
+            <li><a href="/news.html">News</a></li>
+            <li><a href="/shop.html">Shop</a></li>
+            <li><a href="/about_us.html">About Us</a></li>
+            <li><a href="/contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div id="search">
+          <input type="text" name="search" id="" placeholder="Search series">
+          <button type="submit">Search</button>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="center">
+        <h1 style="text-align: center">
+          Vibrant News, the latest anime and manga news!
+        </h1>
+        <div id="np-news-section">
+          <h3>Top Stories</h3>
+          <div id="news-stories">
+            <!-- List of news stories goes here -->
+          </div>
+          <a href="https://www.crunchyroll.com/news/" class="link" target="_blank" style="display: block">More News</a>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p style="text-align: center; margin-top: 20px">
+        Copyright &copy;2022. All rights to series go to their respective licensors.
+      </p>
+    </footer>
+  </body>
+  <script src="functions.js" type="module"></script>
 </html>
