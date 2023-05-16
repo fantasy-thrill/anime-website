@@ -1,0 +1,6 @@
+[submodule "documents/news-articles"]
+	path = documents/news-articles
+	url = https://github.com/fantasy-thrill/news-articles.git
+[submodule "news-articles"]
+	path = news-articles
+	url = https://github.com/fantasy-thrill/news-articles.git
