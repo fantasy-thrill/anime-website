@@ -95,6 +95,7 @@ export function toggleImageWidth(className) {
   } 
 }
 
+// Function for displaying the featured anime series
 export function displayFeaturedAnime(title) {
   const subsection = document.getElementById("featured-anime-subsection")
   const watchBtn = document.querySelector(".options a")
@@ -119,12 +120,9 @@ export function displayFeaturedAnime(title) {
 }
 
 // Script for news section on home page
-fetch('homepagetopstories.json')
-.then((response) => response.json())
-.then((json) => displayHomePageNews(json))
+export function displayHomePageNews(objArr) {
+  const topStories = document.getElementById("top-stories")
 
-const topStories = document.getElementById("top-stories")
-function displayHomePageNews(objArr) {
   for (const article of objArr) {
     const tile = document.createElement('div')
     topStories.appendChild(tile)
@@ -144,7 +142,10 @@ function displayHomePageNews(objArr) {
     anchor.setAttribute('href', article["url"])
     anchor.setAttribute('class', 'news-link')
     anchor.textContent = article["title"]
-    subTitle.textContent = article["description"]
+
+    const letterRegex = /(?<![A-Z\s])[A-Z]/g
+    const lastAndFirst = article["description"].match(letterRegex)
+    subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
     
     const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]
@@ -159,13 +160,10 @@ function displayHomePageNews(objArr) {
 }
 
 // Script for the main news page
-fetch('newsarticles.json')
-.then((response) => response.json())
-.then((json) => displayNews(json))
+export function displayNews(objArr) {
+  const newsList = document.querySelector('#news-stories')
 
-const newsList = document.querySelector('#news-stories')
-function displayNews(objArr) {
-for (const article of objArr) {
+  for (const article of objArr) {
     const tile = document.createElement('div')
     newsList.appendChild(tile)
     tile.setAttribute('class', 'news-img')
@@ -184,7 +182,10 @@ for (const article of objArr) {
     anchor.setAttribute('href', article["url"])
     anchor.setAttribute('class', 'news-link')
     anchor.textContent = article["title"]
-    subTitle.textContent = article["description"]
+
+    const letterRegex = /(?<![A-Z\s])[A-Z]/g
+    const lastAndFirst = article["description"].match(letterRegex)
+    subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
     
     const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]

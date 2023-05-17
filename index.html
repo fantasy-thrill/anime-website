@@ -76,8 +76,15 @@
  </footer>
  <script src="functions.js" type="module"></script>
  <script type="module">
-  import { displayMostPopularAnime, toggleImageWidth, displaySuggestedSeries, displayFeaturedAnime } from "/functions.js"
+  import { 
+    displayMostPopularAnime, 
+    toggleImageWidth, 
+    displaySuggestedSeries, 
+    displayFeaturedAnime, 
+    displayHomePageNews 
+  } from "/functions.js"
   import data from "/data.js"
+  
   const mostPopularList = data.mostPopularList
   const suggestedSeries = data.suggestedSeries
 
@@ -86,6 +93,10 @@
   toggleImageWidth(".show-tile")
   toggleImageWidth(".anime-img")
   displayFeaturedAnime("Demon Slayer: Kimetsu no Yaiba")
+
+  fetch('news-articles/homepagetopstories.json')
+   .then((response) => response.json())
+   .then((json) => displayHomePageNews(json))
  </script>
 </body>
 </html>

@@ -65,4 +65,11 @@
     </footer>
   </body>
   <script src="functions.js" type="module"></script>
+  <script type="module">
+    import { displayNews } from "/functions.js"
+
+    fetch('news-articles/newsarticles.json')
+     .then((response) => response.json())
+     .then((json) => displayNews(json))
+  </script>
 </html>
