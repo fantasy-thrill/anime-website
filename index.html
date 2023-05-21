@@ -83,7 +83,7 @@
     displayFeaturedAnime, 
     displayHomePageNews 
   } from "/functions.js"
-  import data from "/data.js"
+  import data from "/Back-end Data/data.js"
   
   const mostPopularList = data.mostPopularList
   const suggestedSeries = data.suggestedSeries
@@ -94,7 +94,7 @@
   toggleImageWidth(".anime-img")
   displayFeaturedAnime("Demon Slayer: Kimetsu no Yaiba")
 
-  fetch('news-articles/homepagetopstories.json')
+  fetch('Back-end Data/homepagetopstories.json')
    .then((response) => response.json())
    .then((json) => displayHomePageNews(json))
  </script>

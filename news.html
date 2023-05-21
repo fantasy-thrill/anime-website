@@ -68,7 +68,7 @@
   <script type="module">
     import { displayNews } from "/functions.js"
 
-    fetch('news-articles/newsarticles.json')
+    fetch('Back-end Data/newsarticles.json')
      .then((response) => response.json())
      .then((json) => displayNews(json))
   </script>

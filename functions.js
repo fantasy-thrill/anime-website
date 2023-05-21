@@ -1,4 +1,4 @@
-import data from "/data.js"
+import data from "/Back-end Data/data.js"
 
 const mostPopularList = data.mostPopularList
 const currentAnimeList = data.currentAnimeList
