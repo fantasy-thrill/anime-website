@@ -6,6 +6,10 @@
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <title>Vibrant - Shows</title>
  <link rel="stylesheet" href="styles.css">
+ <style>
+  #alphabetical-list { max-width: 1500px; margin: 0 auto; }
+  #alphabetical-list a, #alphabetical-list a:visited { color: rgb(2, 228, 2) }
+ </style>
  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
  <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
 </head>
@@ -37,43 +41,48 @@
    </div>
   </div>
  </header>
- <div class="center">
-  <h2 style="color: green;">Browse our extensive catalog of anime series</h2>
-  <input type="text" name="search" id="" placeholder="Search series">
-  <button type="submit">Search</button>
-  <div id="alphabetical-list">
-   <h1>A</h1>
-   <ul>
-     <li><a href="https://www.crunchyroll.com/attack-on-titan">Attack on Titan</a></li>
-   </ul>
-   <h1>B</h1>
-   <ul>
-     <li><a href="https://www.crunchyroll.com/black-clover">Black Clover</a></li>
-     <li><a href="https://www.crunchyroll.com/bleach">Bleach</a></li>
-     <li><a href="https://www.crunchyroll.com/boruto-naruto-next-generations">Boruto: Naruto Next Generations</a></li>
-   </ul>
-   <h1>C</h1>
-   <ul>
-     <li><a href="https://www.crunchyroll.com/cowboy-bebop">Cowboy Bebop</a></li>
-   </ul>
-   <h1>D</h1>
-   <ul>
-     <li><a href="https://www.crunchyroll.com/demon-slayer-kimetsu-no-yaiba">Demon Slayer: Kimetsu no Yaiba</a></li>
-     <li><a href="https://www.crunchyroll.com/dr-stone">Dr. Stone</a></li>
-   </ul>
-   <h1>F</h1>
-   <ul>
-     <li><a href="https://www.crunchyroll.com/fire-force">Fire Force</a></li>
-     <li><a href="https://www.crunchyroll.com/fullmetal-alchemist-brotherhood">Fullmetal Alchemist: Brotherhood</a></li>
-   </ul>
- </div>
- </div>
- <br>
- <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
+ <main>
+  <div class="center">
+   <h2 style="text-align: center;">Browse our extensive catalog of anime series</h2>
+   <section id="alphabetical-list">
+     <!-- Entire list of anime goes here -->
+   </section>
+  </div>
+ </main>
+ <footer>
+   <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
+ </footer>
 </body>
+<script src="functions.js" type="module"></script>
 <script type="module">
  import data from "/Back-end Data/data.js"
+ import { displayTitles } from "/functions.js"
+
  const currentAnimeList = data.currentAnimeList
  console.log(currentAnimeList)
+
+ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ const alphabeticalList = document.getElementById("alphabetical-list")
+
+ for (const letter of alphabet) {
+  const letterSection = document.createElement("div")
+  letterSection.setAttribute("id", letter)
+  alphabeticalList.appendChild(letterSection)
+
+  const letterHeading = document.createElement("h1")
+  letterHeading.textContent = letter
+  letterSection.appendChild(letterHeading)
+ }
+
+ displayTitles()
+
+ const letterSections = document.querySelectorAll("#alphabetical-list div")
+
+ for (const section of letterSections) {
+  const sectionList = section.querySelector("ul")
+  if (sectionList.innerHTML.trim() === "") {
+    section.style.display = "none"
+  }
+ }
 </script>
 </html>

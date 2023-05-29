@@ -159,6 +159,25 @@ export function displayHomePageNews(objArr) {
   }
 }
 
+// Script for displaying anime titles on Shows page
+export function displayTitles() {
+  const letterSections = document.querySelectorAll("#alphabetical-list div")
+  
+  for (const section of letterSections) {
+    const sectionList = document.createElement("ul")
+    section.appendChild(sectionList)
+    
+    for (const anime of currentAnimeList) {
+      if (anime["name"].startsWith(section.id)) {
+        const listItem = document.createElement("li")
+        listItem.innerHTML = `<a href=\"${anime["url"]}\">${anime["name"]}</a>`
+        sectionList.appendChild(listItem)
+      }
+    }
+  }
+}
+
+
 // Script for the main news page
 export function displayNews(objArr) {
   const newsList = document.querySelector('#news-stories')
