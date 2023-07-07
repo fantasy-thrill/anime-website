@@ -15,6 +15,7 @@ margin: 0;
  overflow: hidden;
  position: fixed;
  top: 0;
+ z-index: 1;
  width: 100%;
 }
 #search input {
@@ -42,9 +43,8 @@ margin: 0;
 }
 #banner-ad {
  height: fit-content;
- margin-top: 75px;
  padding: 200px 20%;
- background-image: url(/images/bannerad.jpg);
+ background-image: url(/images/new-banner.jpg);
  background-color: rgb(0, 0, 0, 0.6);
  background-blend-mode: darken;
  text-align: center;
@@ -155,6 +155,7 @@ hr {
 #featured-anime img {
  display: block;
  margin: 0 auto;
+ max-width: 900px;
 }
 #featured-anime p {
  font-size: 1.25em;
@@ -288,8 +289,11 @@ hr {
  body {
   font-size: 10px;
  }
+ main {
+  margin-top: 61px;
+ }
  #banner-ad {
-  margin-top: 61.5px;
+  padding: 100px 20%;
  }
  #logo {
   width: 200px;
@@ -300,13 +304,27 @@ hr {
  #search button {
   padding: 10px;
  }
+ #mp-show-tiles {
+  position: absolute;
+  left: 10px;
+  max-width: 380px;
+ }
+ .show-tile img {
+  width: 35vw;
+ }
  #suggestions {
-  gap: 30px;
-  margin: 0 !important;
+  gap: 10px;
+  margin: 250px 0 10px 0 !important;
+  grid-template-columns: 1fr;
+ }
+ .anime-img img {
+  width: 75vw;
+ }
+ .anime-description {
+  margin-bottom: 25px;
  }
  #featured-anime img {
   width: 100%;
-  margin: 0 !important;
  }
  .options {
   margin: 3em 0;

@@ -2,7 +2,6 @@ import data from "/Back-end Data/data.js"
 
 const mostPopularList = data.mostPopularList
 const currentAnimeList = data.currentAnimeList
-const suggestedSeries = data.suggestedSeries
 
 // Function for responsive navigation bar
 function mobileBarFunc() {
@@ -27,52 +26,58 @@ function mobileBarFunc() {
 mobileBarFunc()
 
 // Script for suggested series section
-export function displaySuggestedSeries() {
+export function displaySuggestedSeries(seriesOne, seriesTwo) {
   const suggestions = document.getElementById("suggestions")
 
-  for (const anime of suggestedSeries) {
-    const animeImg = document.createElement("div")
-    animeImg.classList.add("anime-img")
-    const animeDescription = document.createElement("div")
-    animeDescription.classList.add("anime-description")
+  for (const anime of currentAnimeList) {
+    if (anime["name"] === seriesOne || anime["name"] === seriesTwo) {
+      const animeImg = document.createElement("div")
+      animeImg.classList.add("anime-img")
+      const animeDescription = document.createElement("div")
+      animeDescription.classList.add("anime-description")
 
-    const image = document.createElement("img")
-    image.setAttribute("src", anime["horizontalImg"])
-    image.setAttribute("alt", anime["name"])
-    animeImg.appendChild(image)
+      const image = document.createElement("img")
+      image.setAttribute("src", anime["horizontalImg"])
+      image.setAttribute("alt", anime["name"])
+      animeImg.appendChild(image)
 
-    const h2 = document.createElement("h2")
-    const para = document.createElement("p")
-    const anchor = document.createElement("a")
-    h2.textContent = anime["name"]
-    para.innerHTML = anime["description"]
-    anchor.setAttribute("href", anime["url"])
-    anchor.setAttribute("target", "_blank")
-    anchor.classList.add("watch-now-btn")
-    anchor.textContent = "Watch Now"
-    animeDescription.append(h2, para, anchor)
+      const h2 = document.createElement("h2")
+      const para = document.createElement("p")
+      const anchor = document.createElement("a")
+      h2.textContent = anime["name"]
+      para.innerHTML = anime["description"]
+      anchor.setAttribute("href", anime["url"])
+      anchor.setAttribute("target", "_blank")
+      anchor.classList.add("watch-now-btn")
+      anchor.textContent = "Watch Now"
+      animeDescription.append(h2, para, anchor)
 
-    suggestions.append(animeImg, animeDescription)
+      suggestions.append(animeImg, animeDescription)
+    }
   }
 }
 
 // Script for "Most Popular" section on home page
 export function displayMostPopularAnime() {
   const mostPopular = document.getElementById('mp-show-tiles')
-  for (const anime of mostPopularList) {
-   const anchor = document.createElement('a')
-   anchor.setAttribute('href', anime["url"])
-   anchor.setAttribute('class', 'show-tile')
-   mostPopular.appendChild(anchor)
-   const animeImg = document.createElement('img')
-   anchor.appendChild(animeImg)
-   if (window.innerWidth < 1000) {
-    animeImg.setAttribute('src', anime["verticalImg"])
-   } else {
-    animeImg.setAttribute('src', anime["horizontalImg"])
-   }
-   animeImg.setAttribute('alt', anime["name"])
-  }
+  mostPopularList.forEach(name => {
+    for (const anime of currentAnimeList) {
+      if (anime["name"] === name) {
+        const anchor = document.createElement('a')
+        anchor.setAttribute('href', anime["url"])
+        anchor.setAttribute('class', 'show-tile')
+        mostPopular.appendChild(anchor)
+        const animeImg = document.createElement('img')
+        anchor.appendChild(animeImg)
+        if (window.innerWidth < 1000) {
+          animeImg.setAttribute('src', anime["verticalImg"])
+        } else {
+          animeImg.setAttribute('src', anime["horizontalImg"])
+        }
+        animeImg.setAttribute('alt', anime["name"])
+      }
+    }
+  })
  }
 
 // Function for alternating between portrait and landscape images
@@ -108,7 +113,6 @@ export function displayFeaturedAnime(title) {
       const animeImg = document.createElement("img")
       animeImg.setAttribute("src", anime["horizontalImg"])
       animeImg.setAttribute("alt", anime["name"])
-      animeImg.style.width = "70%"
 
       const description = document.createElement("p")
       description.innerHTML = anime["description"]
@@ -122,6 +126,20 @@ export function displayFeaturedAnime(title) {
 // Script for news section on home page
 export function displayHomePageNews(objArr) {
   const topStories = document.getElementById("top-stories")
+
+  function getSecondOccurrence(str, letter, regex) {
+    const firstIndex = str.indexOf(letter);
+    const secondIndex = str.indexOf(letter, firstIndex + 1);
+    const thirdIndex = str.indexOf(letter, secondIndex + 1)
+
+    const testStr = str[secondIndex - 1] + str[secondIndex]
+    
+    if (!regex.test(testStr)) {
+      return thirdIndex
+    } else {
+      return secondIndex;
+    }
+  }
 
   for (const article of objArr) {
     const tile = document.createElement('div')
@@ -145,7 +163,11 @@ export function displayHomePageNews(objArr) {
 
     const letterRegex = /(?<![A-Z\s])[A-Z]/g
     const lastAndFirst = article["description"].match(letterRegex)
-    subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
+    if (lastAndFirst[0] === lastAndFirst[1]) {
+      subTitle.textContent = article["description"].substring(0, getSecondOccurrence(article["description"], lastAndFirst[1], letterRegex))
+    } else {
+      subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
+    }
     
     const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]
@@ -165,12 +187,19 @@ export function displayTitles() {
   
   for (const section of letterSections) {
     const sectionList = document.createElement("ul")
+    sectionList.style.listStyleType = "none"
     section.appendChild(sectionList)
     
     for (const anime of currentAnimeList) {
       if (anime["name"].startsWith(section.id)) {
         const listItem = document.createElement("li")
-        listItem.innerHTML = `<a href=\"${anime["url"]}\">${anime["name"]}</a>`
+        listItem.style.margin = "10px 0"
+        const anchor = document.createElement("a")
+        anchor.setAttribute("href", anime["url"])
+        const imageStyle = "width: 5em; vertical-align: middle; margin-right: 20px"
+        anchor.innerHTML = `<img src=\"${anime["verticalImg"]}\" alt=\"${anime["name"]}\" style=\"${imageStyle}\">
+        ${anime["name"]}`
+        listItem.appendChild(anchor)
         sectionList.appendChild(listItem)
       }
     }
@@ -179,8 +208,22 @@ export function displayTitles() {
 
 
 // Script for the main news page
-export function displayNews(objArr) {
-  const newsList = document.querySelector('#news-stories')
+export function displayNews(objArr, divID) {
+  const newsList = document.getElementById(divID)
+  
+  // function getSecondOccurrence(str, letter, regex) {
+  //   const firstIndex = str.indexOf(letter);
+  //   const secondIndex = str.indexOf(letter, firstIndex + 1);
+  //   const thirdIndex = str.indexOf(letter, secondIndex + 1)
+
+  //   const testStr = str[secondIndex - 1] + str[secondIndex]
+    
+  //   if (!regex.test(testStr)) {
+  //     return thirdIndex
+  //   } else {
+  //     return secondIndex;
+  //   }
+  // }
 
   for (const article of objArr) {
     const tile = document.createElement('div')
@@ -189,7 +232,7 @@ export function displayNews(objArr) {
     const img = document.createElement('img')
     tile.appendChild(img)
     img.setAttribute('src', article["urlToImage"])
-    img.width = 170
+    img.style.width = "15em"
 
     const row = document.createElement('div')
     const anchor = document.createElement('a')
@@ -202,10 +245,21 @@ export function displayNews(objArr) {
     anchor.setAttribute('class', 'news-link')
     anchor.textContent = article["title"]
 
-    const letterRegex = /(?<![A-Z\s])[A-Z]/g
-    const lastAndFirst = article["description"].match(letterRegex)
-    subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
-    
+    const symbolRegex = /\/\//
+    if (symbolRegex.test(article["description"])) {
+      const slashes = article["description"].match(symbolRegex)[0]
+      subTitle.textContent = article["description"].substring(0, article["description"].indexOf(slashes))
+    } else {
+      subTitle.textContent = article["description"]
+    }
+    // const letterRegex = /(?<![A-Z\s])[A-Z]/g
+    // const lastAndFirst = article["description"].match(letterRegex)
+    // if (lastAndFirst[0] === lastAndFirst[1]) {
+    //   subTitle.textContent = article["description"].substring(0, getSecondOccurrence(article["description"], lastAndFirst[1], letterRegex))
+    // } else {
+    //   subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
+    // }
+
     const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]
     const newDateStr = new Date(dateStr)
@@ -216,4 +270,16 @@ export function displayNews(objArr) {
 
     row.append(anchor, subTitle, pubDate)
  }
+}
+
+export function mostImportantStories(newsObjArr, customArr) {
+  for (const article of newsObjArr) {
+    const articleMatch = currentAnimeList.find(anime => {
+      const titleRegex = new RegExp(anime["name"], "gi");
+      return titleRegex.test(article["title"])
+    })
+    if (articleMatch) {
+      customArr.push(article)
+    }
+  }
 }

@@ -10,67 +10,67 @@
  <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
 </head>
 <body>
- <header>
-  <div class="header">
-   <div id="logo-container">
-    <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
-    <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
-    <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
-   </div>
-   <div id="navigation-bar">
-    <ul>
-     <li><a href="/shows.html">Shows</a></li>
-     <li><a href="/news.html">News</a></li>
-     <li><a href="/shop.html">Shop</a></li>
-     <li><a href="/about_us.html">About Us</a></li>
-     <li><a href="/contact.html">Contact</a></li>
-    </ul>
-   </div>
-   <div id="search">
-    <input type="text" name="search" id="" placeholder="Search series">
-    <button type="submit">Search</button>
-   </div>
-  </div>
- </header>
- <main>
-  <div id="banner-ad">
-    <div id="banner-message">
-      <h1 style="font-size: 3.75em;">Vibrant is your custom home for the latest popular anime series!</h1>
-      <p style="font-size: 1.875em;">Stream our immense catalog now!</p>
+  <header>
+    <div class="header">
+      <div id="logo-container">
+       <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
+       <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
+       <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
+      </div>
+      <div id="navigation-bar">
+        <ul>
+         <li><a href="/shows.html">Shows</a></li>
+         <li><a href="/news.html">News</a></li>
+         <li><a href="/shop.html">Shop</a></li>
+         <li><a href="/about_us.html">About Us</a></li>
+         <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div id="search">
+       <input type="text" name="search" id="" placeholder="Search series">
+       <button type="submit">Search</button>
+      </div>
     </div>
-   </div>
-  <div class="center">
-   <section id="most-popular">
-    <h2>Most Popular</h2>
-    <hr>
-    <div id="mp-show-tiles">
-      <!-- List of currently most popular anime goes here -->
+  </header>
+  <main>
+    <div id="banner-ad">
+      <div id="banner-message">
+        <h1 style="font-size: 3.75em;">Vibrant is your custom home for the latest popular anime series!</h1>
+        <p style="font-size: 1.875em;">Stream our immense catalog now!</p>
+      </div>
     </div>
-    <div id="suggestions">
-      <!-- Extra suggestions of anime go here -->
+    <div class="center">
+      <section id="most-popular">
+       <h2>Most Popular</h2>
+       <hr>
+       <div id="mp-show-tiles">
+         <!-- List of currently most popular anime goes here -->
+       </div>
+       <div id="suggestions">
+         <!-- Extra suggestions of anime go here -->
+       </div>
+      </section>
+      <section id="featured-anime">
+        <h2>Featured Anime</h2>
+        <hr>
+        <div id="featured-anime-subsection">
+         <!-- Featured anime series goes here -->
+        </div>
+        <div class="options">
+         <a href="" target="_blank" class="link">Watch Now</a>
+         <a href="/shows.html" class="link">More Shows</a>
+        </div>
+      </section>
+      <section id="news-section">
+       <h2>Check out the latest news!</h2>
+       <hr>
+       <div id="top-stories">
+         <!-- The two top news stories go here -->
+       </div>
+       <a href="/news.html" class="link" id="more-news-btn">More News</a>
+      </section>
     </div>
-   </section>
-   <section id="featured-anime">
-    <h2>Featured Anime</h2>
-    <hr>
-    <div id="featured-anime-subsection">
-      <!-- Featured anime series goes here -->
-    </div>
-    <div class="options">
-      <a href="" target="_blank" class="link">Watch Now</a>
-      <a href="/shows.html" class="link">More Shows</a>
-    </div>
-   </section>
-   <section id="news-section">
-    <h2>Check out the latest news!</h2>
-    <hr>
-    <div id="top-stories">
-      <!-- The two top news stories go here -->
-    </div>
-    <a href="/news.html" class="link" id="more-news-btn">More News</a>
-   </section>
-  </div>
- </main>
+  </main>
  <footer>
   <p style="text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
  </footer>
@@ -81,7 +81,7 @@
     toggleImageWidth, 
     displaySuggestedSeries, 
     displayFeaturedAnime, 
-    displayHomePageNews 
+    displayNews
   } from "/functions.js"
   import data from "/Back-end Data/data.js"
   
@@ -89,14 +89,28 @@
   const suggestedSeries = data.suggestedSeries
 
   displayMostPopularAnime()
-  displaySuggestedSeries()
+  displaySuggestedSeries("Bleach", "Dr. Stone")
   toggleImageWidth(".show-tile")
-  toggleImageWidth(".anime-img")
-  displayFeaturedAnime("Demon Slayer: Kimetsu no Yaiba")
+  displayFeaturedAnime("Jujutsu Kaisen")
 
-  fetch('Back-end Data/homepagetopstories.json')
-   .then((response) => response.json())
-   .then((json) => displayHomePageNews(json))
- </script>
+  const topStories = []
+  let url = 'https://newsapi.org/v2/everything?' + 'domains=crunchyroll.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
+  let req = new Request(url);
+
+  fetch(req)
+  .then((response) => response.json())
+  .then((json) => {
+    let count = 0;
+    for (const article of json["articles"]) {
+      if (count < 2) {
+        topStories.push(article);
+        count++;
+      } else {
+        break;
+      }
+    }
+    displayNews(topStories, "top-stories");
+  });
+  </script>
 </body>
 </html>
