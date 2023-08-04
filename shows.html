@@ -8,7 +8,7 @@
  <link rel="stylesheet" href="styles.css">
  <style>
   #alphabetical-list { max-width: 1500px; margin: 0 auto; }
-  #alphabetical-list a, #alphabetical-list a:visited { color: rgb(2, 228, 2) }
+  #alphabetical-list a, #alphabetical-list a:visited { display: block; max-width: fit-content; color: rgb(2, 228, 2) }
  </style>
  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
  <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
@@ -55,11 +55,7 @@
 </body>
 <script src="functions.js" type="module"></script>
 <script type="module">
- import data from "/Back-end Data/data.js"
  import { displayTitles } from "/functions.js"
-
- const currentAnimeList = data.currentAnimeList
- console.log(currentAnimeList)
 
  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
  const alphabeticalList = document.getElementById("alphabetical-list")
@@ -74,15 +70,19 @@
   letterSection.appendChild(letterHeading)
  }
 
- displayTitles()
-
- const letterSections = document.querySelectorAll("#alphabetical-list div")
-
- for (const section of letterSections) {
-  const sectionList = section.querySelector("ul")
-  if (sectionList.innerHTML.trim() === "") {
-    section.style.display = "none"
-  }
- }
+ fetch("/Back-end Data/catalog.json")
+  .then(response => response.json())
+  .then(catalog => {
+    const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
+    displayTitles(currentAnimeList)
+    const letterSections = document.querySelectorAll("#alphabetical-list div")
+    for (const section of letterSections) {
+     const sectionList = section.querySelector("ul")
+     if (sectionList.innerHTML.trim() === "") {
+       section.style.display = "none"
+     }
+    }
+  })
+  .catch(error => console.log("Request not received: " + error))
 </script>
 </html>

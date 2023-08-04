@@ -83,18 +83,20 @@
     displayFeaturedAnime, 
     displayNews
   } from "/functions.js"
-  import data from "/Back-end Data/data.js"
+
+  fetch("/Back-end Data/catalog.json")
+   .then(response => response.json())
+   .then(catalog => {
+     const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
+     displayMostPopularAnime(currentAnimeList)
+     displaySuggestedSeries(currentAnimeList, "Hell's Paradise", "Dr. Stone")
+     toggleImageWidth(currentAnimeList, ".show-tile")
+     displayFeaturedAnime(currentAnimeList, "Jujutsu Kaisen")
+   })
+   .catch(error => console.log("Request not received: " + error))
   
-  const mostPopularList = data.mostPopularList
-  const suggestedSeries = data.suggestedSeries
-
-  displayMostPopularAnime()
-  displaySuggestedSeries("Bleach", "Dr. Stone")
-  toggleImageWidth(".show-tile")
-  displayFeaturedAnime("Jujutsu Kaisen")
-
   const topStories = []
-  let url = 'https://newsapi.org/v2/everything?' + 'domains=crunchyroll.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
+  let url = 'https://newsapi.org/v2/everything?' + 'domains=animenewsnetwork.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
   let req = new Request(url);
 
   fetch(req)
@@ -102,11 +104,9 @@
   .then((json) => {
     let count = 0;
     for (const article of json["articles"]) {
-      if (count < 2) {
+      if (article["urlToImage"] !== "" && count < 2) {
         topStories.push(article);
         count++;
-      } else {
-        break;
       }
     }
     displayNews(topStories, "top-stories");

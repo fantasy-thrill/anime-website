@@ -1,7 +1,9 @@
-import data from "/Back-end Data/data.js"
-
-const mostPopularList = data.mostPopularList
-const currentAnimeList = data.currentAnimeList
+export const mostPopularList = [
+  "Jujutsu Kaisen",
+  "Bleach: Thousand-Year Blood War",
+  "Demon Slayer: Kimetsu no Yaiba",
+  "Vinland Saga"
+]
 
 // Function for responsive navigation bar
 function mobileBarFunc() {
@@ -26,10 +28,10 @@ function mobileBarFunc() {
 mobileBarFunc()
 
 // Script for suggested series section
-export function displaySuggestedSeries(seriesOne, seriesTwo) {
+export function displaySuggestedSeries(objArr, seriesOne, seriesTwo) {
   const suggestions = document.getElementById("suggestions")
 
-  for (const anime of currentAnimeList) {
+  for (const anime of objArr) {
     if (anime["name"] === seriesOne || anime["name"] === seriesTwo) {
       const animeImg = document.createElement("div")
       animeImg.classList.add("anime-img")
@@ -58,10 +60,10 @@ export function displaySuggestedSeries(seriesOne, seriesTwo) {
 }
 
 // Script for "Most Popular" section on home page
-export function displayMostPopularAnime() {
+export function displayMostPopularAnime(objArr) {
   const mostPopular = document.getElementById('mp-show-tiles')
   mostPopularList.forEach(name => {
-    for (const anime of currentAnimeList) {
+    for (const anime of objArr) {
       if (anime["name"] === name) {
         const anchor = document.createElement('a')
         anchor.setAttribute('href', anime["url"])
@@ -81,12 +83,12 @@ export function displayMostPopularAnime() {
  }
 
 // Function for alternating between portrait and landscape images
-export function toggleImageWidth(className) {
+export function toggleImageWidth(objArr, className) {
   const titles = document.querySelectorAll(className)
   const mediaQuery = window.matchMedia('(max-width: 1000px)')
   for (const title of titles) {
     const animeImg = title.querySelector('img')
-    for (const anime of currentAnimeList) {
+    for (const anime of objArr) {
       if (animeImg.alt === anime["name"]) {
         mediaQuery.addEventListener('change', (event) => {
           if (event.matches) {
@@ -101,11 +103,11 @@ export function toggleImageWidth(className) {
 }
 
 // Function for displaying the featured anime series
-export function displayFeaturedAnime(title) {
+export function displayFeaturedAnime(objArr, title) {
   const subsection = document.getElementById("featured-anime-subsection")
   const watchBtn = document.querySelector(".options a")
 
-  for (const anime of currentAnimeList) {
+  for (const anime of objArr) {
     if (title === anime["name"]) {
       const heading = document.createElement("h3")
       heading.textContent = anime["name"]
@@ -182,7 +184,7 @@ export function displayHomePageNews(objArr) {
 }
 
 // Script for displaying anime titles on Shows page
-export function displayTitles() {
+export function displayTitles(objArr) {
   const letterSections = document.querySelectorAll("#alphabetical-list div")
   
   for (const section of letterSections) {
@@ -190,7 +192,7 @@ export function displayTitles() {
     sectionList.style.listStyleType = "none"
     section.appendChild(sectionList)
     
-    for (const anime of currentAnimeList) {
+    for (const anime of objArr) {
       if (anime["name"].startsWith(section.id)) {
         const listItem = document.createElement("li")
         listItem.style.margin = "10px 0"
@@ -210,20 +212,6 @@ export function displayTitles() {
 // Script for the main news page
 export function displayNews(objArr, divID) {
   const newsList = document.getElementById(divID)
-  
-  // function getSecondOccurrence(str, letter, regex) {
-  //   const firstIndex = str.indexOf(letter);
-  //   const secondIndex = str.indexOf(letter, firstIndex + 1);
-  //   const thirdIndex = str.indexOf(letter, secondIndex + 1)
-
-  //   const testStr = str[secondIndex - 1] + str[secondIndex]
-    
-  //   if (!regex.test(testStr)) {
-  //     return thirdIndex
-  //   } else {
-  //     return secondIndex;
-  //   }
-  // }
 
   for (const article of objArr) {
     const tile = document.createElement('div')
@@ -252,13 +240,6 @@ export function displayNews(objArr, divID) {
     } else {
       subTitle.textContent = article["description"]
     }
-    // const letterRegex = /(?<![A-Z\s])[A-Z]/g
-    // const lastAndFirst = article["description"].match(letterRegex)
-    // if (lastAndFirst[0] === lastAndFirst[1]) {
-    //   subTitle.textContent = article["description"].substring(0, getSecondOccurrence(article["description"], lastAndFirst[1], letterRegex))
-    // } else {
-    //   subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
-    // }
 
     const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]
