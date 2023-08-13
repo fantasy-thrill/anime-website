@@ -156,6 +156,7 @@ hr {
  display: block;
  margin: 0 auto;
  max-width: 900px;
+ width: 100%;
 }
 #featured-anime p {
  font-size: 1.25em;
@@ -205,13 +206,14 @@ hr {
  color: lightgreen; 
  font-size: 1.5em;
 }
-/* .news-info p { 
- font-size: 14px;
-} */
 #news-stories { 
  display: grid; 
  grid-template-columns: auto 1fr; 
  gap: 30px; 
+ column-gap: 45px;
+}
+.news-img img {
+  width: 15em;
 }
 
 
@@ -284,8 +286,14 @@ hr {
  }
 }
 
+@media (min-width: 900px) and (max-width: 1200px) {
+  main {
+    margin-top: 150px;
+  }
+}
+
 /* Stylesheet for smartphones */
-@media (max-width: 400px) {
+@media (max-width: 425px) {
  body {
   font-size: 10px;
  }
@@ -336,8 +344,18 @@ hr {
  #top-stories {
   margin: 2em 0;
   column-gap: 20px;
+  grid-template-columns: 1fr;
  }
  .hp-news-img img {
   width: 25vw !important;
+ }
+ #news-stories {
+  grid-template-columns: 1fr;
+ }
+ .news-img img {
+  width: 30em;
+ }
+ .news-info {
+  margin-block-end: 30px;
  }
 }

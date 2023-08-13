@@ -74,7 +74,7 @@
  <footer>
   <p style="text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
  </footer>
- <script src="functions.js" type="module"></script>
+ <script src="/functions.js" type="module"></script>
  <script type="module">
   import { 
     displayMostPopularAnime, 
@@ -90,7 +90,7 @@
      const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
      displayMostPopularAnime(currentAnimeList)
      displaySuggestedSeries(currentAnimeList, "Hell's Paradise", "Dr. Stone")
-     toggleImageWidth(currentAnimeList, ".show-tile")
+     toggleImageWidth(currentAnimeList, ".show-tile", ".anime-img")
      displayFeaturedAnime(currentAnimeList, "Jujutsu Kaisen")
    })
    .catch(error => console.log("Request not received: " + error))

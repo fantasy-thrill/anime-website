@@ -83,14 +83,16 @@ export function displayMostPopularAnime(objArr) {
  }
 
 // Function for alternating between portrait and landscape images
-export function toggleImageWidth(objArr, className) {
-  const titles = document.querySelectorAll(className)
-  const mediaQuery = window.matchMedia('(max-width: 1000px)')
-  for (const title of titles) {
+export function toggleImageWidth(objArr, classOne, classTwo) {
+  const mpTitles = document.querySelectorAll(classOne)
+  const sugTitles = document.querySelectorAll(classTwo)
+  const mediaQueryOne = window.matchMedia('(max-width: 1000px)')
+  const mediaQueryTwo = window.matchMedia('(min-width: 450px) and (max-width: 1000px)')
+  for (const title of mpTitles) {
     const animeImg = title.querySelector('img')
     for (const anime of objArr) {
       if (animeImg.alt === anime["name"]) {
-        mediaQuery.addEventListener('change', (event) => {
+        mediaQueryOne.addEventListener('change', (event) => {
           if (event.matches) {
             animeImg.src = anime["verticalImg"]
           } else {
@@ -100,6 +102,20 @@ export function toggleImageWidth(objArr, className) {
       }
     }
   } 
+  for (const title of sugTitles) {
+    const animeImg = title.querySelector('img')
+    for (const anime of objArr) {
+      if (animeImg.alt === anime["name"]) {
+        mediaQueryTwo.addEventListener('change', (event) => {
+          if (event.matches) {
+            animeImg.src = anime["verticalImg"]
+          } else {
+            animeImg.src = anime["horizontalImg"]
+          }
+        })
+      }
+    }
+  }
 }
 
 // Function for displaying the featured anime series
@@ -122,64 +138,6 @@ export function displayFeaturedAnime(objArr, title) {
       watchBtn.setAttribute("href", anime["url"])
       subsection.append(heading, animeImg, description)
     }
-  }
-}
-
-// Script for news section on home page
-export function displayHomePageNews(objArr) {
-  const topStories = document.getElementById("top-stories")
-
-  function getSecondOccurrence(str, letter, regex) {
-    const firstIndex = str.indexOf(letter);
-    const secondIndex = str.indexOf(letter, firstIndex + 1);
-    const thirdIndex = str.indexOf(letter, secondIndex + 1)
-
-    const testStr = str[secondIndex - 1] + str[secondIndex]
-    
-    if (!regex.test(testStr)) {
-      return thirdIndex
-    } else {
-      return secondIndex;
-    }
-  }
-
-  for (const article of objArr) {
-    const tile = document.createElement('div')
-    topStories.appendChild(tile)
-    tile.setAttribute('class', 'hp-news-img')
-    const img = document.createElement('img')
-    tile.appendChild(img)
-    img.setAttribute('src', article["urlToImage"])
-    img.style.width = '250px'
-
-    const row = document.createElement('div')
-    const anchor = document.createElement('a')
-    const subTitle = document.createElement('p')
-    const pubDate = document.createElement('p')
-
-    topStories.appendChild(row)
-    row.setAttribute('class', 'news-info')
-    anchor.setAttribute('href', article["url"])
-    anchor.setAttribute('class', 'news-link')
-    anchor.textContent = article["title"]
-
-    const letterRegex = /(?<![A-Z\s])[A-Z]/g
-    const lastAndFirst = article["description"].match(letterRegex)
-    if (lastAndFirst[0] === lastAndFirst[1]) {
-      subTitle.textContent = article["description"].substring(0, getSecondOccurrence(article["description"], lastAndFirst[1], letterRegex))
-    } else {
-      subTitle.textContent = article["description"].substring(0, article["description"].indexOf(lastAndFirst[1]))
-    }
-    
-    const theDay = article["publishedAt"].match(/\d{4}-\d\d-\d\d/g)
-    const dateStr = theDay[0]
-    const newDateStr = new Date(dateStr)
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    const formattedDate = newDateStr.toLocaleDateString('en-US', options);
-    pubDate.textContent = formattedDate
-    pubDate.style.fontStyle = 'italic'
-
-    row.append(anchor, subTitle, pubDate)
   }
 }
 
@@ -220,7 +178,7 @@ export function displayNews(objArr, divID) {
     const img = document.createElement('img')
     tile.appendChild(img)
     img.setAttribute('src', article["urlToImage"])
-    img.style.width = "15em"
+    // img.style.width = "15em"
 
     const row = document.createElement('div')
     const anchor = document.createElement('a')
