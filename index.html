@@ -89,7 +89,7 @@
    .then(catalog => {
      const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
      displayMostPopularAnime(currentAnimeList)
-     displaySuggestedSeries(currentAnimeList, "Hell's Paradise", "Dr. Stone")
+     displaySuggestedSeries(currentAnimeList, "Mashle: Magic and Muscles", "Zom 100: Bucket List of the Dead")
      toggleImageWidth(currentAnimeList, ".show-tile", ".anime-img")
      displayFeaturedAnime(currentAnimeList, "Jujutsu Kaisen")
    })
@@ -111,6 +111,11 @@
     }
     displayNews(topStories, "top-stories");
   });
+
+  fetch("/data")
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error fetching data:', error))
   </script>
 </body>
 </html>
