@@ -1,56 +1,45 @@
 const http = require('http');
 const mysql = require('mysql2');
 const fs = require('fs');
+const express = require('express');
+const app = express();
+require('dotenv').config();
 
-const server = http.createServer((req, res) => {
-  if (req.url === '/data' && req.method === 'GET') {
-    // Handle the client-side request for data
-    const connection = mysql.createConnection({
-      host: 'localhost',
-      port: 3306,
-      user: 'root',
-      password: 'DKfh%*hc3j5LVyu#',
-      database: 'anime_series'
-    });
+app.get('/data', (req, res) => {
+  const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DATABASE
+  });
 
-    connection.connect((err) => {
+  connection.connect((err) => {
+    if (err) {
+      console.error('Error connecting to database:', err);
+      res.statusCode = 500;
+      res.end('Internal Server Error');
+      return;
+    }
+
+    connection.query('SELECT * FROM anime_series.series_data', (err, results) => {
       if (err) {
-        console.error('Error connecting to database:', err);
+        console.error('Error querying database:', err);
         res.statusCode = 500;
         res.end('Internal Server Error');
         return;
       }
 
-      connection.query('SELECT * FROM anime_series.series_data', (err, results) => {
-        if (err) {
-          console.error('Error querying database:', err);
-          res.statusCode = 500;
-          res.end('Internal Server Error');
-          return;
-        }
-
-        res.writeHead(200, {
-          'Content-Type': 'application/json'
-        });
-        res.end(JSON.stringify(results));
-      });
-    });
-  } else {
-    // Serve the HTML file
-    fs.readFile('index.html', (err, data) => {
-      if (err) {
-        res.statusCode = 500;
-        res.end('Internal Server Error');
-        return;
-      }
       res.writeHead(200, {
-        'Content-Type': 'text/html'
+        'Content-Type': 'application/json'
       });
-      res.end(data);
+      res.end(JSON.stringify(results));
     });
-  }
+  });
 });
 
-server.listen(5500, () => {
-  console.log('Server is running on port 5500');
+app.use(express.static(__dirname));
+
+app.listen(5500, () => {
+  console.log('app listening on port 5500');
 });
