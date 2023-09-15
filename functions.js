@@ -1,8 +1,8 @@
 export const mostPopularList = [
   "Jujutsu Kaisen",
   "Bleach: Thousand-Year Blood War",
-  "Demon Slayer: Kimetsu no Yaiba",
-  "Vinland Saga"
+  "One Piece",
+  "Demon Slayer: Kimetsu no Yaiba"
 ]
 
 // Function for responsive navigation bar
@@ -32,23 +32,23 @@ export function displaySuggestedSeries(objArr, seriesOne, seriesTwo) {
   const suggestions = document.getElementById("suggestions")
 
   for (const anime of objArr) {
-    if (anime["name"] === seriesOne || anime["name"] === seriesTwo) {
+    if (anime["Name"] === seriesOne || anime["Name"] === seriesTwo) {
       const animeImg = document.createElement("div")
       animeImg.classList.add("anime-img")
       const animeDescription = document.createElement("div")
       animeDescription.classList.add("anime-description")
 
       const image = document.createElement("img")
-      image.setAttribute("src", anime["horizontalImg"])
-      image.setAttribute("alt", anime["name"])
+      image.setAttribute("src", anime["Horizontal Image"])
+      image.setAttribute("alt", anime["Name"])
       animeImg.appendChild(image)
 
       const h2 = document.createElement("h2")
       const para = document.createElement("p")
       const anchor = document.createElement("a")
-      h2.textContent = anime["name"]
-      para.innerHTML = anime["description"]
-      anchor.setAttribute("href", anime["url"])
+      h2.innerHTML = anime["Name"]
+      para.innerHTML = anime["Description"]
+      anchor.setAttribute("href", anime["URL"])
       anchor.setAttribute("target", "_blank")
       anchor.classList.add("watch-now-btn")
       anchor.textContent = "Watch Now"
@@ -64,19 +64,19 @@ export function displayMostPopularAnime(objArr) {
   const mostPopular = document.getElementById('mp-show-tiles')
   mostPopularList.forEach(name => {
     for (const anime of objArr) {
-      if (anime["name"] === name) {
+      if (anime["Name"] === name) {
         const anchor = document.createElement('a')
-        anchor.setAttribute('href', anime["url"])
+        anchor.setAttribute('href', anime["URL"])
         anchor.setAttribute('class', 'show-tile')
         mostPopular.appendChild(anchor)
         const animeImg = document.createElement('img')
         anchor.appendChild(animeImg)
         if (window.innerWidth < 1000) {
-          animeImg.setAttribute('src', anime["verticalImg"])
+          animeImg.setAttribute('src', anime["Vertical Image"])
         } else {
-          animeImg.setAttribute('src', anime["horizontalImg"])
+          animeImg.setAttribute('src', anime["Horizontal Image"])
         }
-        animeImg.setAttribute('alt', anime["name"])
+        animeImg.setAttribute('alt', anime["Name"])
       }
     }
   })
@@ -91,12 +91,12 @@ export function toggleImageWidth(objArr, classOne, classTwo) {
   for (const title of mpTitles) {
     const animeImg = title.querySelector('img')
     for (const anime of objArr) {
-      if (animeImg.alt === anime["name"]) {
+      if (animeImg.alt === anime["namName"]) {
         mediaQueryOne.addEventListener('change', (event) => {
           if (event.matches) {
-            animeImg.src = anime["verticalImg"]
+            animeImg.src = anime["Vertical Image"]
           } else {
-            animeImg.src = anime["horizontalImg"]
+            animeImg.src = anime["Horizontal Image"]
           }
         })
       }
@@ -105,12 +105,12 @@ export function toggleImageWidth(objArr, classOne, classTwo) {
   for (const title of sugTitles) {
     const animeImg = title.querySelector('img')
     for (const anime of objArr) {
-      if (animeImg.alt === anime["name"]) {
+      if (animeImg.alt === anime["Name"]) {
         mediaQueryTwo.addEventListener('change', (event) => {
           if (event.matches) {
-            animeImg.src = anime["verticalImg"]
+            animeImg.src = anime["Vertical Image"]
           } else {
-            animeImg.src = anime["horizontalImg"]
+            animeImg.src = anime["Horizontal Image"]
           }
         })
       }
@@ -124,18 +124,18 @@ export function displayFeaturedAnime(objArr, title) {
   const watchBtn = document.querySelector(".options a")
 
   for (const anime of objArr) {
-    if (title === anime["name"]) {
+    if (title === anime["Name"]) {
       const heading = document.createElement("h3")
-      heading.textContent = anime["name"]
+      heading.textContent = anime["Name"]
 
       const animeImg = document.createElement("img")
-      animeImg.setAttribute("src", anime["horizontalImg"])
-      animeImg.setAttribute("alt", anime["name"])
+      animeImg.setAttribute("src", anime["Horizontal Image"])
+      animeImg.setAttribute("alt", anime["Name"])
 
       const description = document.createElement("p")
-      description.innerHTML = anime["description"]
+      description.innerHTML = anime["Description"]
 
-      watchBtn.setAttribute("href", anime["url"])
+      watchBtn.setAttribute("href", anime["URL"])
       subsection.append(heading, animeImg, description)
     }
   }
@@ -151,14 +151,14 @@ export function displayTitles(objArr) {
     section.appendChild(sectionList)
     
     for (const anime of objArr) {
-      if (anime["name"].startsWith(section.id)) {
+      if (anime["Name"].startsWith(section.id)) {
         const listItem = document.createElement("li")
         listItem.style.margin = "10px 0"
         const anchor = document.createElement("a")
-        anchor.setAttribute("href", anime["url"])
+        anchor.setAttribute("href", anime["URL"])
         const imageStyle = "width: 5em; vertical-align: middle; margin-right: 20px"
-        anchor.innerHTML = `<img src=\"${anime["verticalImg"]}\" alt=\"${anime["name"]}\" style=\"${imageStyle}\">
-        ${anime["name"]}`
+        anchor.innerHTML = `<img src=\"${anime["Vertical Image"]}\" alt=\"${anime["Name"]}\" style=\"${imageStyle}\">
+        ${anime["Name"]}`
         listItem.appendChild(anchor)
         sectionList.appendChild(listItem)
       }
@@ -212,13 +212,20 @@ export function displayNews(objArr, divID) {
 }
 
 export function mostImportantStories(newsObjArr, customArr) {
-  for (const article of newsObjArr) {
-    const articleMatch = currentAnimeList.find(anime => {
-      const titleRegex = new RegExp(anime["name"], "gi");
-      return titleRegex.test(article["title"])
-    })
-    if (articleMatch) {
-      customArr.push(article)
-    }
-  }
+  fetch("/data")
+    .then(response => response.json())
+    .then(catalog => {
+      let count = 0
+      for (const article of newsObjArr) {
+        const articleMatch = catalog.find(anime => {
+          const titleRegex = new RegExp(anime["Name"], "gi");
+          return titleRegex.test(article["title"])
+        })
+        if (articleMatch && count < 2) {
+          customArr.push(article)
+          count++
+        }
+      }
+      displayNews(customArr, "top-stories")
+    }) 
 }

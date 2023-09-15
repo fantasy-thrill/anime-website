@@ -27,7 +27,8 @@
         </ul>
       </div>
       <div id="search">
-       <input type="text" name="search" id="" placeholder="Search series">
+       <input type="text" name="search" id="search-bar" placeholder="Search series">
+       <div id="dropdown-menu"></div>
        <button type="submit">Search</button>
       </div>
     </div>
@@ -81,19 +82,20 @@
     toggleImageWidth, 
     displaySuggestedSeries, 
     displayFeaturedAnime, 
-    displayNews
+    displayNews,
+    mostImportantStories
   } from "/functions.js"
 
-  fetch("/Back-end Data/catalog.json")
-   .then(response => response.json())
-   .then(catalog => {
-     const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
-     displayMostPopularAnime(currentAnimeList)
-     displaySuggestedSeries(currentAnimeList, "Mashle: Magic and Muscles", "Zom 100: Bucket List of the Dead")
-     toggleImageWidth(currentAnimeList, ".show-tile", ".anime-img")
-     displayFeaturedAnime(currentAnimeList, "Jujutsu Kaisen")
-   })
-   .catch(error => console.log("Request not received: " + error))
+  fetch("/data")
+    .then(response => response.json())
+    .then(catalog => {
+      console.log(catalog)
+      displayMostPopularAnime(catalog)
+      displaySuggestedSeries(catalog, "Spy &times; Family", "Bleach: Thousand-Year Blood War")
+      toggleImageWidth(catalog, ".show-tile", ".anime-img")
+      displayFeaturedAnime(catalog, "Jujutsu Kaisen")
+    })
+    .catch(error => console.error('Error fetching data:', error))
   
   const topStories = []
   let url = 'https://newsapi.org/v2/everything?' + 'domains=animenewsnetwork.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
@@ -102,20 +104,8 @@
   fetch(req)
   .then((response) => response.json())
   .then((json) => {
-    let count = 0;
-    for (const article of json["articles"]) {
-      if (article["urlToImage"] !== "" && count < 2) {
-        topStories.push(article);
-        count++;
-      }
-    }
-    displayNews(topStories, "top-stories");
+    mostImportantStories(json["articles"], topStories)
   });
-
-  fetch("/data")
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error fetching data:', error))
   </script>
 </body>
 </html>
