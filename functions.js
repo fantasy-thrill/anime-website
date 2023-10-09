@@ -27,6 +27,45 @@ function mobileBarFunc() {
 
 mobileBarFunc()
 
+// Function for search bar functionality
+function searchBarFunc() {
+  fetch("/data")
+    .then(response => response.json())
+    .then(catalog => {
+      const searchBar = document.getElementById('search-bar');
+      const dropdownMenu = document.getElementById('dropdown-menu');
+
+      searchBar.addEventListener('input', () => {
+        const searchTerm = new RegExp(searchBar.value, "i")
+        const filteredItems = catalog.filter(title => searchTerm.test(title["Name"]));
+        
+        if (searchBar.value === "" || filteredItems.length === 0) {
+          dropdownMenu.style.display = 'none'
+        } else {
+          dropdownMenu.innerHTML = '';
+          dropdownMenu.style.width = `${searchBar.offsetWidth}px`
+          dropdownMenu.style.display = 'block'
+        }
+        
+        for (let i = 0; i < 10; i++) {
+          const option = document.createElement('a');
+          option.style.display = "block"
+          option.style.margin = "0.25em 0"
+          option.setAttribute("href", filteredItems[i]["URL"])
+
+          const searchTerm = new RegExp(searchBar.value, "i")
+          const termMatch = filteredItems[i]["Name"].match(searchTerm)
+          option.textContent = filteredItems[i]["Name"];
+          const boldText = option.textContent.replace(termMatch[0], `<strong>${termMatch[0]}</strong>`)
+          option.innerHTML = boldText;
+          dropdownMenu.appendChild(option);
+        }
+      });
+    })
+}
+
+searchBarFunc()
+
 // Script for suggested series section
 export function displaySuggestedSeries(objArr, seriesOne, seriesTwo) {
   const suggestions = document.getElementById("suggestions")

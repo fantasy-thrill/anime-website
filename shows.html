@@ -23,20 +23,16 @@
    </div>
    <div id="navigation-bar">
     <ul>
-     <li><a href="/shows.html">Shows</a>
-     </li>
-     <li><a href="/news.html">News</a>
-     </li>
-     <li><a href="/shop.html">Shop</a>
-     </li>
-     <li><a href="/about_us.html">About Us</a>
-     </li>
-     <li><a href="/contact.html">Contact</a>
-     </li>
+     <li><a href="/shows.html">Shows</a></li>
+     <li><a href="/news.html">News</a></li>
+     <li><a href="/shop.html">Shop</a></li>
+     <li><a href="/about_us.html">About Us</a></li>
+     <li><a href="/contact.html">Contact</a></li>
     </ul>
    </div>
    <div id="search">
-    <input type="text" name="search" id="" placeholder="Search series">
+    <input type="text" name="search" id="search-bar" placeholder="Search series">
+    <div id="dropdown-menu"></div>
     <button type="submit">Search</button>
    </div>
   </div>
@@ -73,14 +69,14 @@
  fetch("/data")
   .then(response => response.json())
   .then(catalog => {
-  //  const currentAnimeList = catalog.sort((a, b) => a.name.localeCompare(b.name))
     displayTitles(catalog)
     const letterSections = document.querySelectorAll("#alphabetical-list div")
+
     for (const section of letterSections) {
-     const sectionList = section.querySelector("ul")
-     if (sectionList.innerHTML.trim() === "") {
-       section.style.display = "none"
-     }
+      const sectionList = section.querySelector("ul")
+      if (sectionList.innerHTML.trim() === "") {
+        section.style.display = "none"
+      }
     }
   })
   .catch(error => console.log("Error fetching data: " + error))
