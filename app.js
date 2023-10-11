@@ -36,7 +36,7 @@ app.get('/data', (req, res) => {
   });
 });
 
-app.use(express.static(__dirname));
+app.use(express.static('public'));
 
 app.listen(5500, () => {
   console.log('app listening on port 5500');
