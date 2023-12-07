@@ -20,7 +20,7 @@ app.get('/data', (req, res) => {
       return;
     }
 
-    connection.query('SELECT * FROM anime_series.series_data', (err, results) => {
+    connection.query('SELECT * FROM anime.series_data', (err, results) => {
       if (err) {
         console.error('Error querying database:', err);
         res.statusCode = 500;

@@ -1,7 +1,7 @@
 body {
 font-family: 'Inter', Arial, sans-serif;
 font-size: 16px; 
-background: url(/images/background.jpg); 
+background: url(https://i.postimg.cc/VNLgzGRj/background.jpg); 
 background-attachment: fixed;
 background-size: cover;
 margin: 0;
@@ -52,7 +52,7 @@ margin: 0;
 #banner-ad {
  height: fit-content;
  padding: 200px 20%;
- background-image: url(/images/new-banner.jpg);
+ background-image: url(https://i.postimg.cc/Jhx1knZf/new-banner.jpg);
  background-color: rgb(0, 0, 0, 0.6);
  background-blend-mode: darken;
  text-align: center;
