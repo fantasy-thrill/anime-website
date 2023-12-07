@@ -1,98 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vibrant - Shows</title>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    #alphabetical-list {
-      max-width: 1500px;
-      margin: 0 auto;
-    }
-
-    #alphabetical-list a,
-    #alphabetical-list a:visited {
-      display: block;
-      max-width: fit-content;
-      color: rgb(2, 228, 2)
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
-  <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Vibrant - Shows</title>
+ <link rel="stylesheet" href="styles.css">
+ <style>
+  #alphabetical-list { max-width: 1500px; margin: 0 auto; }
+  #alphabetical-list a, #alphabetical-list a:visited { display: block; max-width: fit-content; color: rgb(2, 228, 2) }
+ </style>
+ <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
+ <script src="https://kit.fontawesome.com/de8236324c.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
-  <header>
-    <div class="header">
-      <div id="logo-container">
-        <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
-        <a href="/index.html"><img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo"
-            width="240"></a>
-        <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
-      </div>
-      <div id="navigation-bar">
-        <ul>
-          <li><a href="/shows.html">Shows</a></li>
-          <li><a href="/news.html">News</a></li>
-          <li><a href="/shop.html">Shop</a></li>
-          <li><a href="/about_us.html">About Us</a></li>
-          <li><a href="/contact.html">Contact</a></li>
-        </ul>
-      </div>
-      <div id="search">
-        <input type="text" name="search" id="search-bar" placeholder="Search series">
-        <div id="dropdown-menu"></div>
-        <button type="submit">Search</button>
-      </div>
-    </div>
-  </header>
-  <main>
-    <div class="center">
-      <h2 style="text-align: center;">Browse our extensive catalog of anime series</h2>
-      <section id="alphabetical-list">
-        <!-- Entire list of anime goes here -->
-      </section>
-    </div>
-  </main>
-  <footer>
-    <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective
-      licensors.</p>
-  </footer>
+ <header>
+  <div class="header">
+   <div id="logo-container">
+    <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
+    <a href="/index.html"><img src="/images/vibrant_logo.jpg" alt="Vibrant" id="logo" width="240"></a>
+    <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
+   </div>
+   <div id="navigation-bar">
+    <ul>
+     <li><a href="/shows.html">Shows</a></li>
+     <li><a href="/news.html">News</a></li>
+     <li><a href="/shop.html">Shop</a></li>
+     <li><a href="/about_us.html">About Us</a></li>
+     <li><a href="/contact.html">Contact</a></li>
+    </ul>
+   </div>
+   <div id="search">
+    <input type="text" name="search" id="search-bar" placeholder="Search series">
+    <div id="dropdown-menu"></div>
+    <button type="submit">Search</button>
+   </div>
+  </div>
+ </header>
+ <main>
+  <div class="center">
+   <h2 style="text-align: center;">Browse our extensive catalog of anime series</h2>
+   <section id="alphabetical-list">
+     <!-- Entire list of anime goes here -->
+   </section>
+  </div>
+ </main>
+ <footer>
+   <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective licensors.</p>
+ </footer>
 </body>
 <script src="functions.js" type="module"></script>
 <script type="module">
-  import { displayTitles } from "/functions.js"
+ import { displayTitles } from "/functions.js"
 
-  const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  const alphabeticalList = document.getElementById("alphabetical-list")
+ const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+ const alphabeticalList = document.getElementById("alphabetical-list")
 
-  for (const letter of alphabet) {
-    const letterSection = document.createElement("div")
-    letterSection.setAttribute("id", letter)
-    alphabeticalList.appendChild(letterSection)
+ for (const letter of alphabet) {
+  const letterSection = document.createElement("div")
+  letterSection.setAttribute("id", letter)
+  alphabeticalList.appendChild(letterSection)
 
-    const letterHeading = document.createElement("h1")
-    letterHeading.textContent = letter
-    letterSection.appendChild(letterHeading)
-  }
+  const letterHeading = document.createElement("h1")
+  letterHeading.textContent = letter
+  letterSection.appendChild(letterHeading)
+ }
 
-  fetch("/data")
-    .then(response => response.json())
-    .then(catalog => {
-      displayTitles(catalog)
-      const letterSections = document.querySelectorAll("#alphabetical-list div")
+ fetch("/data")
+  .then(response => response.json())
+  .then(catalog => {
+    displayTitles(catalog)
+    const letterSections = document.querySelectorAll("#alphabetical-list div")
 
-      for (const section of letterSections) {
-        const sectionList = section.querySelector("ul")
-        if (sectionList.innerHTML.trim() === "") {
-          section.style.display = "none"
-        }
+    for (const section of letterSections) {
+      const sectionList = section.querySelector("ul")
+      if (sectionList.innerHTML.trim() === "") {
+        section.style.display = "none"
       }
-    })
-    .catch(error => console.log("Error fetching data: " + error))
+    }
+  })
+  .catch(error => console.log("Error fetching data: " + error))
 </script>
-
 </html>
