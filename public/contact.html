@@ -12,39 +12,6 @@
       .center {
         margin-top: 75px;
       }
-      #contact-form {
-        margin: 0 auto;
-        max-width: 1200px;
-      }
-      form label {
-        font-size: 20px;
-        margin-bottom: 10px;
-        display: block;
-        text-align: left;
-      }
-      form input {
-        padding: 5px 0px;
-        margin-bottom: 20px;
-        font-size: 1.25em;
-        width: 250px;
-        box-sizing: border-box;
-      }
-      form button {
-        display: block;
-        font-family: "Inter", sans-serif;
-        font-weight: bold;
-        color: white;
-        background-color: forestgreen;
-        border: 2px solid darkgreen;
-        border-radius: 5px;
-        font-size: 20px;
-        padding: 10px;
-      }
-      form button:hover {
-        color: forestgreen;
-        background-color: white;
-        cursor: pointer;
-      }
     </style>
   </head>
   <body>
@@ -65,7 +32,8 @@
           </ul>
         </div>
         <div id="search">
-          <input type="text" name="search" id="" placeholder="Search series">
+          <input type="text" name="search" id="search-bar" placeholder="Search series">
+          <div id="dropdown-menu"></div>
           <button type="submit">Search</button>
         </div>
       </div>
@@ -86,7 +54,7 @@
             <input type="text" name="email" id="email">
 
             <p>Please tell us what you are writing to us about.</p>
-            <textarea name="" id="" cols="50" rows="10"></textarea>
+            <textarea name="message-field" id="message-field"></textarea>
 
             <button type="submit">Submit</button>
           </form>
