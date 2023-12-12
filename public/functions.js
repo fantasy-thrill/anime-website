@@ -196,7 +196,6 @@ export function displayNews(objArr, divID) {
     const img = document.createElement('img')
     tile.appendChild(img)
     img.setAttribute('src', article.urlToImage)
-    // img.style.width = "15em"
 
     const row = document.createElement('div')
     const anchor = document.createElement('a')
