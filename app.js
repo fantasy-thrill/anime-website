@@ -1,7 +1,15 @@
 const mysql = require('mysql2');
+const sequelize = require("./sequelize.config")
+const db = require("./models")
 const express = require('express');
 const app = express();
 require('dotenv').config();
+
+sequelize.authenticate()
+  .then(() => console.log("Successfully connected to database"))
+  .catch((error) => console.error("Couldn't connect to database: ", error))
+
+const { Anime } = db.sequelize.models
 
 app.get('/data', (req, res) => {
   const connection = mysql.createConnection({
