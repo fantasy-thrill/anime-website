@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     id: {
       type: DataTypes.UUID,
+      primaryKey: true,
       allowNull: false,
       unique: true
     },
@@ -31,7 +32,8 @@ module.exports = (sequelize, DataTypes) => {
       unique: true
     }
   }, {
-    timestamps: false
+    timestamps: false,
+    freezeTableName: true
   });
 
   return Anime;

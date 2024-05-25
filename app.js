@@ -11,41 +11,20 @@ sequelize.authenticate()
 
 const { Anime } = db.sequelize.models
 
-app.get('/data', (req, res) => {
-  const connection = mysql.createConnection({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
-  });
+app.get("/data", async (req, res) => {
+  try {
+    const data = await Anime.findAll()
+    const catalog = []
+    data.forEach(series => catalog.push(series.toJSON()))
+    res.json(catalog)
 
-  connection.connect((err) => {
-    if (err) {
-      console.error('Error connecting to database:', err);
-      res.statusCode = 500;
-      res.end('Internal Server Error');
-      return;
-    }
-
-    connection.query('SELECT * FROM anime_series.series_data', (err, results) => {
-      if (err) {
-        console.error('Error querying database:', err);
-        res.statusCode = 500;
-        res.end('Internal Server Error');
-        return;
-      }
-
-      res.writeHead(200, {
-        'Content-Type': 'application/json'
-      });
-      res.end(JSON.stringify(results));
-    });
-  });
-});
+  } catch (error) {
+    res.sendStatus(500).end("Could not fetch catalog: ", error)
+  }
+})
 
 app.use(express.static('public'));
 
 app.listen(5500, () => {
-  console.log('app listening on port 5500');
+  console.log('Server running on port 5500');
 });
