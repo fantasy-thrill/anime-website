@@ -14,6 +14,7 @@ async function addAnime() {
 
     console.log("Closing connection...")
     sequelize.close()
+    
   } catch (error) {
     console.log("Failed to populate database: ", error)
   }

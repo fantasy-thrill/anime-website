@@ -74,6 +74,13 @@
         </div>
         <a href="/news.html" class="link" id="more-news-btn">More News</a>
       </section>
+      <section id="reviews-section">
+        <h2>Reviews of latest episodes</h2>
+        <hr>
+        <div id="episode-reviews">
+          <!-- Episode reviews go here -->
+        </div>
+      </section>
     </div>
   </main>
   <footer>
@@ -95,25 +102,33 @@
       .then(catalog => {
         console.log(catalog)
 
-        const largeWidth = window.matchMedia('(max-width: 1000px)')
-        const mediumWidth = window.matchMedia('(min-width: 450px) and (max-width: 1000px)')
+        const largeWidth = window.matchMedia("(max-width: 1000px)")
+        const mediumWidth = window.matchMedia("(min-width: 450px) and (max-width: 1000px)")
 
         displayMostPopularAnime(catalog)
-        displaySuggestedSeries(catalog, "Demon Slayer: Kimetsu no Yaiba", "Mashle: Magic and Muscles")
+        displaySuggestedSeries(catalog, /academia/gi, /mashle/gi)
         toggleImageWidth(catalog, ".show-tile", largeWidth)
         toggleImageWidth(catalog, ".anime-img", mediumWidth)
-        displayFeaturedAnime(catalog, "Jujutsu Kaisen")
+        displayFeaturedAnime(catalog, /demon slayer/gi)
       })
-      .catch(error => console.error('Error fetching data:', error))
+      .catch(error => console.error("Error fetching data:", error))
 
     const topStories = []
-    let url = 'https://newsapi.org/v2/everything?' + 'domains=animenewsnetwork.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
+    const episodeReviews = []
+
+    let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" + "apiKey=dccefe62ab10407cbaf369616049b2a3";
     let req = new Request(url);
 
     fetch(req)
       .then((response) => response.json())
       .then((json) => {
-        mostImportantStories(json.articles, topStories)
+        const isAReview = str => /Episode \d+$/.test(str)
+
+        const newsList = json.articles.filter(article => !isAReview(article.title))
+        const reviewList = json.articles.filter(article => isAReview(article.title))
+
+        mostImportantStories(newsList, topStories, "top-stories")
+        mostImportantStories(reviewList, episodeReviews, "episode-reviews")
       });
   </script>
 </body>

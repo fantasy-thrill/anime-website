@@ -73,8 +73,12 @@
     .then((response) => response.json())
     .then((json) => {
         let count = 0
-        for (const article of json["articles"]) {
-          if (article["urlToImage"] !== "" && count < 10) {
+        for (const article of json.articles) {
+          if (
+            article.urlToImage !== "" && 
+            !/Episode \d+$/.test(article.title) && 
+            count < 10
+          ) {
             newsArticles.push(article)
             count++
           }

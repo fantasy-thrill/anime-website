@@ -1,8 +1,8 @@
 export const mostPopularList = [
-  "Jujutsu Kaisen",
-  "Spy &times; Family",
-  "Dr. Stone",
-  "The Rising of the Shield Hero"
+  "demon slayer",
+  "kaiju",
+  "my hero",
+  "mashle"
 ]
 
 // Function for responsive navigation bar
@@ -32,23 +32,23 @@ function searchBarFunc() {
   fetch("/data")
     .then(response => response.json())
     .then(catalog => {
-      const searchBar = document.getElementById('search-bar');
-      const dropdownMenu = document.getElementById('dropdown-menu');
+      const searchBar = document.getElementById("search-bar");
+      const dropdownMenu = document.getElementById("dropdown-menu");
 
-      searchBar.addEventListener('input', () => {
+      searchBar.addEventListener("input", () => {
         const searchTerm = new RegExp(searchBar.value, "i")
         const filteredItems = catalog.filter(title => searchTerm.test(title.name));
         
         if (searchBar.value === "" || filteredItems.length === 0) {
-          dropdownMenu.style.display = 'none'
+          dropdownMenu.style.display = "none"
         } else {
-          dropdownMenu.innerHTML = '';
+          dropdownMenu.innerHTML = "";
           dropdownMenu.style.width = `${searchBar.offsetWidth}px`
-          dropdownMenu.style.display = 'block'
+          dropdownMenu.style.display = "block"
         }
         
         for (let i = 0; i < 10; i++) {
-          const option = document.createElement('a');
+          const option = document.createElement("a");
           option.style.display = "block"
           option.style.margin = "0.25em 0"
           option.setAttribute("href", filteredItems[i].url)
@@ -71,7 +71,7 @@ export function displaySuggestedSeries(objArr, seriesOne, seriesTwo) {
   const suggestions = document.getElementById("suggestions")
 
   for (const anime of objArr) {
-    if (anime.name === seriesOne || anime.name === seriesTwo) {
+    if (seriesOne.test(anime.name) || seriesTwo.test(anime.name)) {
       const animeImg = document.createElement("div")
       animeImg.classList.add("anime-img")
       const animeDescription = document.createElement("div")
@@ -100,22 +100,24 @@ export function displaySuggestedSeries(objArr, seriesOne, seriesTwo) {
 
 // Script for "Most Popular" section on home page
 export function displayMostPopularAnime(objArr) {
-  const mostPopular = document.getElementById('mp-show-tiles')
+  const mostPopular = document.getElementById("mp-show-tiles")
   mostPopularList.forEach(name => {
+    const nameRegex = new RegExp(name, "gi")
+
     for (const anime of objArr) {
-      if (anime.name === name) {
-        const anchor = document.createElement('a')
-        anchor.setAttribute('href', anime.url)
-        anchor.setAttribute('class', 'show-tile')
+      if (nameRegex.test(anime.name)) {
+        const anchor = document.createElement("a")
+        anchor.setAttribute("href", anime.url)
+        anchor.setAttribute("class", "show-tile")
         mostPopular.appendChild(anchor)
-        const animeImg = document.createElement('img')
+        const animeImg = document.createElement("img")
         anchor.appendChild(animeImg)
         if (window.innerWidth < 1000) {
-          animeImg.setAttribute('src', anime.verticalImg)
+          animeImg.setAttribute("src", anime.verticalImg)
         } else {
-          animeImg.setAttribute('src', anime.horizontalImg)
+          animeImg.setAttribute("src", anime.horizontalImg)
         }
-        animeImg.setAttribute('alt', anime.name)
+        animeImg.setAttribute("alt", anime.name)
       }
     }
   })
@@ -125,10 +127,10 @@ export function displayMostPopularAnime(objArr) {
 export function toggleImageWidth(objArr, className, mediaQuery) {
   const resImages = document.querySelectorAll(className)
   for (const title of resImages) {
-    const animeImg = title.querySelector('img')
+    const animeImg = title.querySelector("img")
     for (const anime of objArr) {
       if (animeImg.alt === anime.name) {
-        mediaQuery.addEventListener('change', (event) => {
+        mediaQuery.addEventListener("change", (event) => {
           animeImg.src = event.matches ? anime.verticalImg : anime.horizontalImg
         })
       }
@@ -142,7 +144,7 @@ export function displayFeaturedAnime(objArr, title) {
   const watchBtn = document.querySelector(".options a")
 
   for (const anime of objArr) {
-    if (title === anime.name) {
+    if (title.test(anime.name)) {
       const heading = document.createElement("h3")
       heading.textContent = anime.name
 
@@ -190,22 +192,22 @@ export function displayNews(objArr, divID) {
   const newsList = document.getElementById(divID)
 
   for (const article of objArr) {
-    const tile = document.createElement('div')
+    const tile = document.createElement("div")
     newsList.appendChild(tile)
-    tile.setAttribute('class', 'news-img')
-    const img = document.createElement('img')
+    tile.setAttribute("class", "news-img")
+    const img = document.createElement("img")
     tile.appendChild(img)
-    img.setAttribute('src', article.urlToImage)
+    img.setAttribute("src", article.urlToImage)
 
-    const row = document.createElement('div')
-    const anchor = document.createElement('a')
-    const subTitle = document.createElement('p')
-    const pubDate = document.createElement('p')
+    const row = document.createElement("div")
+    const anchor = document.createElement("a")
+    const subTitle = document.createElement("p")
+    const pubDate = document.createElement("p")
 
     newsList.appendChild(row)
-    row.setAttribute('class', 'news-info')
-    anchor.setAttribute('href', article.url)
-    anchor.setAttribute('class', 'news-link')
+    row.setAttribute("class", "news-info")
+    anchor.setAttribute("href", article.url)
+    anchor.setAttribute("class", "news-link")
     anchor.textContent = article.title
 
     const symbolRegex = /\/\//
@@ -219,16 +221,16 @@ export function displayNews(objArr, divID) {
     const theDay = article.publishedAt.match(/\d{4}-\d\d-\d\d/g)
     const dateStr = theDay[0]
     const newDateStr = new Date(dateStr)
-    const options = { month: 'long', day: 'numeric', year: 'numeric' };
-    const formattedDate = newDateStr.toLocaleDateString('en-US', options);
+    const options = { month: "long", day: "numeric", year: "numeric" };
+    const formattedDate = newDateStr.toLocaleDateString("en-US", options);
     pubDate.textContent = formattedDate
-    pubDate.style.fontStyle = 'italic'
+    pubDate.style.fontStyle = "italic"
 
     row.append(anchor, subTitle, pubDate)
  }
 }
 
-export function mostImportantStories(newsObjArr, customArr) {
+export function mostImportantStories(newsObjArr, customArr, divID) {
   fetch("/data")
     .then(response => response.json())
     .then(catalog => {
@@ -243,6 +245,6 @@ export function mostImportantStories(newsObjArr, customArr) {
           count++
         }
       }
-      displayNews(customArr, "top-stories")
+      displayNews(customArr, divID)
     }) 
 }
