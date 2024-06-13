@@ -112,11 +112,11 @@ export function displayMostPopularAnime(objArr) {
         mostPopular.appendChild(anchor)
         const animeImg = document.createElement("img")
         anchor.appendChild(animeImg)
-        if (window.innerWidth < 1000) {
-          animeImg.setAttribute("src", anime.verticalImg)
-        } else {
+
+        window.innerWidth < 1000 ?
+          animeImg.setAttribute("src", anime.verticalImg) :
           animeImg.setAttribute("src", anime.horizontalImg)
-        }
+         
         animeImg.setAttribute("alt", anime.name)
       }
     }
@@ -227,7 +227,7 @@ export function displayNews(objArr, divID) {
     pubDate.style.fontStyle = "italic"
 
     row.append(anchor, subTitle, pubDate)
- }
+  }
 }
 
 export function mostImportantStories(newsObjArr, customArr, divID) {
