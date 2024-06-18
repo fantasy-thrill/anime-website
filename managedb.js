@@ -1,7 +1,7 @@
 const db = require("./models")
 const sequelize = require("./sequelize.config")
 
-const { Anime } = db.sequelize.models
+const { Anime, Product } = db.sequelize.models
 
 async function manageDatabase() {
   try {
@@ -10,6 +10,7 @@ async function manageDatabase() {
     console.log("Connected!")
 
     await Anime.sync()
+    await Product.sync()
     await updateAnime(
       "My Hero Academia",
       "horizontalImg",
@@ -53,5 +54,6 @@ async function updateAnime(name, prop, newValue) {
   const animeToUpdate = await Anime.findOne({ where: { name: name } })
   animeToUpdate[prop] = newValue
   await animeToUpdate.save()
+  console.log(`Instance updated: ${animeToUpdate.name}, ${prop}: ${newValue}`)
 }
 

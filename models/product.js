@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-  const Anime = sequelize.define("Anime", {
+  const Product = sequelize.define("Product", {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -11,30 +11,22 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true
     },
-    verticalImg: {
+    image: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true
     },
-    horizontalImg: {
-      type: DataTypes.STRING,
+    price: {
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: false,
-      unique: true
+      unique: false
     },
     description: {
       type: DataTypes.TEXT,
       allowNull: false,
       unique: true
-    },
-    url: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true
     }
-  }, {
-    timestamps: false,
-    freezeTableName: true
-  });
+  }, { timestamps: false });
 
-  return Anime;
-}; 
+  return Product;
+};
