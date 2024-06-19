@@ -230,6 +230,28 @@ export function displayNews(objArr, divID) {
   }
 }
 
+export function displayShopItems(objArr) {
+  for (const item of objArr) {
+    const collectionDiv = document.getElementById("items")
+    const itemDiv = document.createElement("div")
+    itemDiv.setAttribute("class", "item")
+    collectionDiv.appendChild(itemDiv)
+
+    const image = document.createElement("img")
+    image.setAttribute("src", item.image)
+    image.setAttribute("alt", item.name)
+    image.style.width = "40%"
+
+    const itemHeader = document.createElement("h4")
+    itemHeader.textContent = item.name
+
+    const priceTag = document.createElement("h2")
+    priceTag.textContent = "$" + item.price
+
+    itemDiv.append(image, itemHeader, priceTag)
+  }
+}
+
 export function mostImportantStories(newsObjArr, customArr, divID) {
   fetch("/data")
     .then(response => response.json())

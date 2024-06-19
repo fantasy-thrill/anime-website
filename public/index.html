@@ -97,21 +97,23 @@
       mostImportantStories
     } from "/functions.js"
 
-    fetch("/data")
-      .then(response => response.json())
-      .then(catalog => {
-        console.log(catalog)
+    try {
+      const response = await fetch("/data")
+      const catalog = await response.json()
+      console.log(catalog)
 
-        const largeWidth = window.matchMedia("(max-width: 1000px)")
-        const mediumWidth = window.matchMedia("(min-width: 450px) and (max-width: 1000px)")
+      const largeWidth = window.matchMedia("(max-width: 1000px)")
+      const mediumWidth = window.matchMedia("(min-width: 450px) and (max-width: 1000px)")
 
-        displayMostPopularAnime(catalog)
-        displaySuggestedSeries(catalog, /academia/gi, /kaiju/gi)
-        toggleImageWidth(catalog, ".show-tile", largeWidth)
-        toggleImageWidth(catalog, ".anime-img", mediumWidth)
-        displayFeaturedAnime(catalog, /demon slayer/gi)
-      })
-      .catch(error => console.error("Error fetching data:", error))
+      displayMostPopularAnime(catalog)
+      displaySuggestedSeries(catalog, /academia/gi, /kaiju/gi)
+      toggleImageWidth(catalog, ".show-tile", largeWidth)
+      toggleImageWidth(catalog, ".anime-img", mediumWidth)
+      displayFeaturedAnime(catalog, /demon slayer/gi)
+
+    } catch (error) {
+      console.error("Error fetching data: ", error)
+    }
 
     const topStories = []
     const episodeReviews = []
@@ -119,17 +121,21 @@
     let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" + "apiKey=dccefe62ab10407cbaf369616049b2a3";
     let req = new Request(url);
 
-    fetch(req)
-      .then((response) => response.json())
-      .then((json) => {
-        const isAReview = str => /Episode \d+$/.test(str)
+    try {
+      const response =  await fetch(req)
+      const objArr = await response.json()
 
-        const newsList = json.articles.filter(article => !isAReview(article.title))
-        const reviewList = json.articles.filter(article => isAReview(article.title))
+      const isAReview = str => /Episode \d+$/.test(str)
 
-        mostImportantStories(newsList, topStories, "top-stories")
-        mostImportantStories(reviewList, episodeReviews, "episode-reviews")
-      });
+      const newsList = objArr.articles.filter(article => !isAReview(article.title))
+      const reviewList = objArr.articles.filter(article => isAReview(article.title))
+
+      mostImportantStories(newsList, topStories, "top-stories")
+      mostImportantStories(reviewList, episodeReviews, "episode-reviews")
+
+    } catch (error) {
+      console.error("Error fetching new stories: ", error)
+    }
   </script>
 </body>
 

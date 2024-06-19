@@ -79,20 +79,23 @@
     letterSection.appendChild(letterHeading)
   }
 
-  fetch("/data")
-    .then(response => response.json())
-    .then(catalog => {
-      displayTitles(catalog)
-      const letterSections = document.querySelectorAll("#alphabetical-list div")
+  try {
+    const response = await fetch("/data")
+    const catalog = await response.json()
 
-      for (const section of letterSections) {
-        const sectionList = section.querySelector("ul")
-        if (sectionList.innerHTML.trim() === "") {
-          section.style.display = "none"
-        }
+    displayTitles(catalog)
+    const letterSections = document.querySelectorAll("#alphabetical-list div")
+
+    for (const section of letterSections) {
+      const sectionList = section.querySelector("ul")
+      if (sectionList.innerHTML.trim() === "") {
+        section.style.display = "none"
       }
-    })
-    .catch(error => console.log("Error fetching data: " + error))
+    }
+
+  } catch (error) {
+    console.log("Error fetching data: ", error)
+  }
 </script>
 
 </html>

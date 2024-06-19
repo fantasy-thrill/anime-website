@@ -23,8 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      unique: true
+      allowNull: true
+      // unique: true
     }
   }, { timestamps: false });
 

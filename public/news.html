@@ -67,25 +67,30 @@
     import { displayNews } from "/functions.js"
 
     const newsArticles = []
-    let url = 'https://newsapi.org/v2/everything?' + 'domains=animenewsnetwork.com&' + 'language=en&' + 'apiKey=dccefe62ab10407cbaf369616049b2a3';
-    let req = new Request(url);
-    fetch(req)
-    .then((response) => response.json())
-    .then((json) => {
-        let count = 0
-        for (const article of json.articles) {
-          if (
-            article.urlToImage !== "" && 
-            !/Episode \d+$/.test(article.title) && 
-            count < 10
-          ) {
-            newsArticles.push(article)
-            count++
-          }
+    let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" +  "apiKey=dccefe62ab10407cbaf369616049b2a3"
+    let req = new Request(url)
+
+    try {
+      const response = await fetch(req)
+      const objArr = await response.json()
+
+      let count = 0
+      for (const article of objArr.articles) {
+        if (
+          article.urlToImage !== "" && 
+          !/Episode \d+$/.test(article.title) && 
+          count < 10
+        ) {
+          newsArticles.push(article)
+          count++
         }
-        console.log(json)
-        console.log(newsArticles)
-        displayNews(newsArticles, "news-stories")
-    })
+      }
+      console.log(objArr)
+      console.log(newsArticles)
+      displayNews(newsArticles, "news-stories")
+
+    } catch (error) {
+      console.error("Error fetching new stories: ", error)
+    }
   </script>
 </html>

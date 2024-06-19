@@ -270,6 +270,30 @@ hr {
   width: 15em;
 }
 
+/* Shopping Page Styles */
+#items {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 1.5em;
+}
+
+.item {
+  text-align: center;
+}
+
+#product-search input {
+  width: 20em;
+  padding: 0.25em;
+}
+
+#product-search input, #product-search button {
+  font-size: 1.25em;
+} 
+
+#product-search button {
+  padding: 0.25em 0.75em;
+}
+
 /* Contact Page Styles */
 #contact-form {
   margin: 0 auto;

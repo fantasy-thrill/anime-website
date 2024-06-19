@@ -15,85 +15,70 @@
     }
 
     .center {
-      padding-top: 2%;
-      padding-bottom: 2%;
-    }
-
-    .item {
-      display: grid;
-      grid-template-columns: 50% 50%;
+      padding: 2% 5em;
     }
   </style>
 </head>
 
 <body>
-  <div class="header">
-    <div>
-      <a href="/index.html"><img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo"
-          width="240"></a>
-    </div>
-    <div class="navigation-bar">
-      <ul>
-        <li>
-          <a href="/shows.html">Shows</a>
-        </li>
-        <li>
-          <a href="/news.html">News</a>
-        </li>
-        <li>
-          <a href="/shop.html">Shop</a>
-        </li>
-        <li>
-          <a href="/about_us.html">About Us</a>
-        </li>
-        <li>
-          <a href="/contact.html">Contact</a>
-        </li>
-      </ul>
-    </div>
-    <div class="search">
-      <input type="text" name="search" id="" placeholder="Search series">
-      <button type="submit">Search</button>
-    </div>
-  </div>
-  <div class="center">
-    <h1>Welcome to the Vibrant Shop! Browse all manga, Blu-rays, figures and other merchandise for your favorite series!
-    </h1>
-    <input type="text" name="search" id="" placeholder="Search the shop">
-    <button type="submit">Search</button>
-    <br>
-    <h2><em>Featured Items</em></h2>
-    <br>
-    <div class="item">
-      <div style="padding: 5%;">
-        <img src="/images/demonslayerhoodieset.jpg" alt="Demon Slayer Hoodie">
-        <h4>Demon Slayer: Kimetsu no Yaiba Tanjiro and Nezuko Crop Top Hoodie</h4>
-        <h2 class="price">$19.99</h2>
+  <header>
+    <div class="header">
+      <div id="logo-container">
+        <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
+        <a href="/index.html">
+          <img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo" width="240">
+        </a>
+        <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
       </div>
-      <div style="padding: 5%;">
-        <img src="/images/attackontitan_figurine_set.jpg" alt="Attack on Titan Figurines">
-        <h4>Attack on Titan Chibi Figurine Set</h4>
-        <h2 class="price">$22.99</h2>
-      </div>
-      <div style="padding: 5%;">
-        <img src="/images/hollow_ichigo.jpg" alt="Hollow Ichigo T-Shirt">
-        <h4>Bleach Hollow Ichigo Black T-Shirt - Size S-XL</h4>
-        <h2 class="price">$17.99</h2>
-      </div>
-      <div style="padding: 5%;">
-        <img src="/images/naruto_set.jpg" alt="Naruto Fan Set">
-        <h4>Naruto Fan Souvenir Set</h4>
-        <h2 class="price">$28.99</h2>
+      <nav id="navigation-bar">
+        <ul>
+          <li><a href="/shows.html">Shows</a></li>
+          <li><a href="/news.html">News</a></li>
+          <li><a href="/shop.html">Shop</a></li>
+          <li><a href="/about_us.html">About Us</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </nav>
+      <div id="search">
+        <input type="text" name="search" id="search-bar" placeholder="Search series">
+        <div id="dropdown-menu"></div>
+        <button type="submit">Search</button>
       </div>
     </div>
-    <br>
-    <h2><a href="https://www.store.crunchyroll.com/" target="_blank">Shop more anime and manga merchandise from A-Z</a>
-    </h2>
-  </div>
+  </header>
+  <main>
+    <div class="center">
+      <h1>Welcome to the Vibrant Shop! Browse all manga, Blu-rays, figures and other merchandise for your favorite
+        series!
+      </h1>
+      <div id="product-search">
+        <input type="text" name="search" placeholder="Search the shop">
+        <button type="submit">Search</button>
+      </div>
+      <h2><em>Featured Items</em></h2>
+      <br>
+      <div id="items">
+        <!-- Shop products go here... -->
+      </div>
+      <br>
+      <h2><a href="https://www.store.crunchyroll.com/" target="_blank">Shop more anime and manga merchandise from
+          A-Z</a>
+      </h2>
+    </div>
+  </main>
   <br>
-  <br>
-  <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective
+  <footer>
+    <p style="font-size: 14px; text-align: center;">Copyright &copy;2022. All rights to series go to their respective
     licensors.</p>
+  </footer>
+  <script src="/public/functions.js"></script>
+  <script type="module">
+    import { displayShopItems } from "./functions.js"
+    
+    fetch("/products")
+     .then(response => response.json())
+     .then(catalog => displayShopItems(catalog))
+  </script>
 </body>
 
 </html>

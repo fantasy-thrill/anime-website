@@ -11,20 +11,26 @@ async function manageDatabase() {
 
     await Anime.sync()
     await Product.sync()
-    await updateAnime(
-      "My Hero Academia",
-      "horizontalImg",
-      "https://i.postimg.cc/jjvbzqm4/my-hero-academia.avif" 
+
+    await addProduct(
+      "Attack on Titan Chibi Figurine Set",
+      "https://i.postimg.cc/5t8JMmxq/attackontitan-figurine-set.jpg",
+      22.99
     )
-    await updateAnime(
-      "Demon Slayer: Kimetsu no Yaiba",
-      "horizontalImg",
-      "https://i.postimg.cc/fRG36CRr/demon-slayer.avif"
+    await addProduct(
+      "Demon Slayer: Kimetsu no Yaiba Tanjiro and Nezuko Crop Top Hoodie",
+      "https://i.postimg.cc/9MpjDFwD/demonslayerhoodieset.jpg",
+      19.99
     )
-    await updateAnime(
-      "Mashle: Magic and Muscles",
-      "horizontalImg",
-      "https://i.postimg.cc/tgGTrgr0/mashle.avif"
+    await addProduct(
+      "Bleach Hollow Ichigo Black T-Shirt - Size S-XL",
+      "https://i.postimg.cc/0Qxs5Jjg/hollow-ichigo.jpg",
+      17.99
+    )
+    await addProduct(
+      "Naruto Fan Souvenir Set",
+      "https://i.postimg.cc/K86bVWy8/naruto-set.jpg",
+      28.99
     )
 
     console.log("Closing connection...")
@@ -55,5 +61,26 @@ async function updateAnime(name, prop, newValue) {
   animeToUpdate[prop] = newValue
   await animeToUpdate.save()
   console.log(`Instance updated: ${animeToUpdate.name}, ${prop}: ${newValue}`)
+}
+
+async function addProduct(name, imgUrl, price) {
+  let code = ""
+  const charString = "ABCDEFGHIJKLM1234567890NOPQRSTUVWXYZ1234567890"
+  const letterOnlyStr = charString.substring(0, 13) + charString.substring(23, 36)
+  
+  for (let i = 0; i < 10; i++) {
+    let str = i < 2 ? letterOnlyStr : charString
+    code += charString.charAt(Math.floor(Math.random() * str.length))
+  }
+
+  const shopProduct = await Product.create({
+    name: name,
+    id: code,
+    image: imgUrl,
+    price: price,
+    description: ""
+  })
+
+  console.log("New product created: " + name)
 }
 
