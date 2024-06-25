@@ -60,7 +60,7 @@ async function updateAnime(name, prop, newValue) {
   const animeToUpdate = await Anime.findOne({ where: { name: name } })
   animeToUpdate[prop] = newValue
   await animeToUpdate.save()
-  console.log(`Instance updated: ${animeToUpdate.name}, ${prop}: ${newValue}`)
+  console.log(`Instance updated: "${animeToUpdate.name}, ${prop}: ${newValue}"`)
 }
 
 async function addProduct(name, imgUrl, price) {

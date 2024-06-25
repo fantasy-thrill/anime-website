@@ -207,6 +207,7 @@ export function displayNews(objArr, divID) {
     newsList.appendChild(row)
     row.setAttribute("class", "news-info")
     anchor.setAttribute("href", article.url)
+    anchor.setAttribute("target", "_blank")
     anchor.setAttribute("class", "news-link")
     anchor.textContent = article.title
 
@@ -240,7 +241,10 @@ export function displayShopItems(objArr) {
     const image = document.createElement("img")
     image.setAttribute("src", item.image)
     image.setAttribute("alt", item.name)
-    image.style.width = "40%"
+    const mediaQuery = window.matchMedia("(max-width: 1100px)")
+    mediaQuery.addEventListener("change", event => 
+      image.style.width = event.matches ? "50%" : "40%"
+    )
 
     const itemHeader = document.createElement("h4")
     itemHeader.textContent = item.name

@@ -271,6 +271,11 @@ hr {
 }
 
 /* Shopping Page Styles */
+#products-section {
+  max-width: 1400px;
+  margin: 3em auto;
+}
+
 #items {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -366,6 +371,13 @@ form button:hover {
 @media (max-width: 1250px) {
   #mp-show-tiles {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1100px) {
+  #items {
+    grid-template-columns: 1fr;
+    row-gap: 2.5em;
   }
 }
 
@@ -508,6 +520,10 @@ form button:hover {
 
   .news-info {
     margin-block-end: 30px;
+  }
+
+  #product-search input {
+    width: 15em;
   }
 
   #message-field {
