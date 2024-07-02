@@ -12,27 +12,6 @@ async function manageDatabase() {
     await Anime.sync()
     await Product.sync()
 
-    await addProduct(
-      "Attack on Titan Chibi Figurine Set",
-      "https://i.postimg.cc/5t8JMmxq/attackontitan-figurine-set.jpg",
-      22.99
-    )
-    await addProduct(
-      "Demon Slayer: Kimetsu no Yaiba Tanjiro and Nezuko Crop Top Hoodie",
-      "https://i.postimg.cc/9MpjDFwD/demonslayerhoodieset.jpg",
-      19.99
-    )
-    await addProduct(
-      "Bleach Hollow Ichigo Black T-Shirt - Size S-XL",
-      "https://i.postimg.cc/0Qxs5Jjg/hollow-ichigo.jpg",
-      17.99
-    )
-    await addProduct(
-      "Naruto Fan Souvenir Set",
-      "https://i.postimg.cc/K86bVWy8/naruto-set.jpg",
-      28.99
-    )
-
     console.log("Closing connection...")
     sequelize.close()
     
