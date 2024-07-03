@@ -12,6 +12,11 @@ async function manageDatabase() {
     await Anime.sync()
     await Product.sync()
 
+    await updateEntry(Product, "C19S19Q8OU", "image", "https://i.postimg.cc/T1FkZFTp/naruto-set.png")
+    await updateEntry(Product, "MT8779Q8MR", "image", "https://i.postimg.cc/509kv8PN/demonslayerhoodieset.png")
+    await updateEntry(Product, "S277HU7EW1", "image", "https://i.postimg.cc/kGB1Yq30/attackontitan-figurine-set.png")
+    await updateEntry(Product, "T7HLY9X694", "image", "https://i.postimg.cc/tTrvz7fd/hollow-ichigo-tshirt.png")
+
     console.log("Closing connection...")
     sequelize.close()
     
@@ -23,7 +28,7 @@ async function manageDatabase() {
 manageDatabase()
 
 async function createAnime(name, code, des, vert, horiz, url) {
-  const newAnime = await Anime.create({
+  await Anime.create({
     name: name,
     id: code,
     verticalImg: vert,
@@ -33,13 +38,6 @@ async function createAnime(name, code, des, vert, horiz, url) {
   })
 
   console.log("New anime created: " + name)
-}
-
-async function updateAnime(name, prop, newValue) {
-  const animeToUpdate = await Anime.findOne({ where: { name: name } })
-  animeToUpdate[prop] = newValue
-  await animeToUpdate.save()
-  console.log(`Instance updated: "${animeToUpdate.name}, ${prop}: ${newValue}"`)
 }
 
 async function addProduct(name, imgUrl, price) {
@@ -52,7 +50,7 @@ async function addProduct(name, imgUrl, price) {
     code += charString.charAt(Math.floor(Math.random() * str.length))
   }
 
-  const shopProduct = await Product.create({
+  await Product.create({
     name: name,
     id: code,
     image: imgUrl,
@@ -61,5 +59,12 @@ async function addProduct(name, imgUrl, price) {
   })
 
   console.log("New product created: " + name)
+}
+
+async function updateEntry(model, code, prop, newValue) {
+  const entryToUpdate = await model.findOne({ where: { id: code } })
+  entryToUpdate[prop] = newValue
+  await entryToUpdate.save()
+  console.log(`Instance updated: "${entryToUpdate.name}, ${prop}: ${newValue}"`)
 }
 
