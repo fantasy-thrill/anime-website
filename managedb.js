@@ -1,5 +1,5 @@
-const db = require("./models")
-const sequelize = require("./sequelize.config")
+const db = require("./amplify/backend/function/fetchSeriesData/src/models")
+const sequelize = require("./amplify/backend/function/fetchSeriesData/src/sequelize.config")
 
 const { Anime, Product } = db.sequelize.models
 
