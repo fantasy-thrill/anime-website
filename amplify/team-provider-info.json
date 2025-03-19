@@ -14,7 +14,8 @@
     "categories": {
       "function": {
         "fetchSeriesData": {
-          "secretsPathAmplifyAppId": "dndgumvlyz7pn"
+          "deploymentBucketName": "amplify-animewebsite-dev-3be74-deployment",
+          "s3Key": "amplify-builds/fetchSeriesData-68337a7574782b6a6242-build.zip"
         }
       }
     }

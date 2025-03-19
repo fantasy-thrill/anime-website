@@ -1,6 +1,5 @@
 {
   "lambdaLayers": [],
-  "secretNames": [
-    "DB_HOST"
-  ]
+  "secretNames": [],
+  "environmentVariableList": []
 }

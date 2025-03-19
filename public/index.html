@@ -16,18 +16,18 @@
     <div class="header">
       <div id="logo-container">
         <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
-        <a href="/index.html">
+        <a href="./index.html">
           <img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo" width="240">
         </a>
         <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
       </div>
       <nav id="navigation-bar">
         <ul>
-          <li><a href="/shows.html">Shows</a></li>
-          <li><a href="/news.html">News</a></li>
-          <li><a href="/shop.html">Shop</a></li>
-          <li><a href="/about_us.html">About Us</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="./shows.html">Shows</a></li>
+          <li><a href="./news.html">News</a></li>
+          <li><a href="./shop.html">Shop</a></li>
+          <li><a href="./about_us.html">About Us</a></li>
+          <li><a href="./contact.html">Contact</a></li>
         </ul>
       </nav>
       <div id="search">
@@ -63,7 +63,7 @@
         </div>
         <div class="options">
           <a href="" target="_blank" class="link">Watch Now</a>
-          <a href="/shows.html" class="link">More Shows</a>
+          <a href="./shows.html" class="link">More Shows</a>
         </div>
       </section>
       <section id="news-section">
@@ -72,7 +72,7 @@
         <div id="top-stories">
           <!-- The two top news stories go here -->
         </div>
-        <a href="/news.html" class="link" id="more-news-btn">More News</a>
+        <a href="./news.html" class="link" id="more-news-btn">More News</a>
       </section>
       <section id="reviews-section">
         <h2>Reviews of latest episodes</h2>
@@ -86,7 +86,7 @@
   <footer>
     <p style="text-align: center;">Copyright &copy; 2024. All rights to series go to their respective licensors.</p>
   </footer>
-  <script src="/functions.js" type="module"></script>
+  <script src="./functions.js" type="module"></script>
   <script type="module">
     import {
       displayMostPopularAnime,
@@ -95,10 +95,10 @@
       displayFeaturedAnime,
       displayNews,
       mostImportantStories
-    } from "/functions.js"
+    } from "./functions.js"
 
     try {
-      const response = await fetch("/data")
+      const response = await fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
       const catalog = await response.json()
       console.log(catalog)
 
@@ -109,7 +109,7 @@
       displaySuggestedSeries(catalog, /academia/gi, /kaiju/gi)
       toggleImageWidth(catalog, ".show-tile", largeWidth)
       toggleImageWidth(catalog, ".anime-img", mediumWidth)
-      displayFeaturedAnime(catalog, /demon slayer/gi)
+      displayFeaturedAnime(catalog, /stone/gi)
 
     } catch (error) {
       console.error("Error fetching data: ", error)

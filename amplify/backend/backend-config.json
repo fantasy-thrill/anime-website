@@ -7,7 +7,15 @@
     }
   },
   "parameters": {
-    "AMPLIFY_function_fetchSeriesData_secretsPathAmplifyAppId": {
+    "AMPLIFY_function_fetchSeriesData_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "fetchSeriesData"
+        }
+      ]
+    },
+    "AMPLIFY_function_fetchSeriesData_s3Key": {
       "usedBy": [
         {
           "category": "function",

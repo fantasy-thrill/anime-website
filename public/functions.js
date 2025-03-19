@@ -29,7 +29,7 @@ mobileBarFunc()
 
 // Function for search bar functionality
 function searchBarFunc() {
-  fetch("/data")
+  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
     .then(response => response.json())
     .then(catalog => {
       const searchBar = document.getElementById("search-bar");
@@ -257,7 +257,7 @@ export function displayShopItems(objArr) {
 }
 
 export function mostImportantStories(newsObjArr, customArr, divID) {
-  fetch("/data")
+  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
     .then(response => response.json())
     .then(catalog => {
       let count = 0

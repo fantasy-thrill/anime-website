@@ -6,11 +6,10 @@
   "license": "Apache-2.0",
   "dependencies": {
     "@aws-sdk/client-ssm": "^3.759.0",
-    "@aws-sdk/dsql-signer": "^3.758.0",
+    "@supabase/supabase-js": "^2.49.1",
     "aws-serverless-express": "^3.3.5",
     "body-parser": "^1.17.1",
-    "express": "^4.15.2",
-    "sequelize": "^6.37.6"
+    "express": "^4.15.2"
   },
   "devDependencies": {
     "@types/aws-lambda": "^8.10.92"

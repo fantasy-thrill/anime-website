@@ -29,17 +29,17 @@
     <div class="header">
       <div id="logo-container">
         <i class="fa-solid fa-bars fa-xl" id="menu-icon"></i>
-        <a href="/index.html"><img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo"
+        <a href="./index.html"><img src="https://i.postimg.cc/v8zNwnbF/vibrant-logo.jpg" alt="Vibrant" id="logo"
             width="240"></a>
         <i class="fa-solid fa-magnifying-glass fa-xl" id="search-icon"></i>
       </div>
       <div id="navigation-bar">
         <ul>
-          <li><a href="/shows.html">Shows</a></li>
-          <li><a href="/news.html">News</a></li>
-          <li><a href="/shop.html">Shop</a></li>
-          <li><a href="/about_us.html">About Us</a></li>
-          <li><a href="/contact.html">Contact</a></li>
+          <li><a href="./shows.html">Shows</a></li>
+          <li><a href="./news.html">News</a></li>
+          <li><a href="./shop.html">Shop</a></li>
+          <li><a href="./about_us.html">About Us</a></li>
+          <li><a href="./contact.html">Contact</a></li>
         </ul>
       </div>
       <div id="search">
@@ -62,9 +62,9 @@
       licensors.</p>
   </footer>
 </body>
-<script src="functions.js" type="module"></script>
+<script src="./functions.js" type="module"></script>
 <script type="module">
-  import { displayTitles } from "/functions.js"
+  import { displayTitles } from "./functions.js"
 
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   const alphabeticalList = document.getElementById("alphabetical-list")
@@ -80,7 +80,7 @@
   }
 
   try {
-    const response = await fetch("/data")
+    const response = await fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
     const catalog = await response.json()
 
     displayTitles(catalog)
