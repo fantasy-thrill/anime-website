@@ -62,12 +62,14 @@
       </p>
     </footer>
   </body>
+  <script src="./config.js" type="module" ></script>
   <script src="./functions.js" type="module"></script>
   <script type="module">
     import { displayNews } from "./functions.js"
 
     const newsArticles = []
-    let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" +  "apiKey=dccefe62ab10407cbaf369616049b2a3"
+    let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" + 
+      "apiKey=" + window.env.NEWS_API_KEY
     let req = new Request(url)
 
     try {
