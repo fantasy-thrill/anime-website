@@ -42,15 +42,16 @@ async function getSecrets() {
   return secrets
 }
 
-app.get("/series", async function(req, res) {
+app.get("/data/:table", async function(req, res) {
   try {
+    const tableName = req.params.table
     const supabase = createClient(
       (await getSecrets()).dbUrl, 
       (await getSecrets()).dbApiKey
     )
     
     const { data, error } = await supabase
-      .from("Anime")
+      .from(tableName.replace(tableName[0], tableName[0].toUpperCase()))
       .select()
       .order("name", { ascending: true })
     

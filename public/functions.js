@@ -29,7 +29,7 @@ mobileBarFunc()
 
 // Function for search bar functionality
 function searchBarFunc() {
-  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
+  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/data/anime")
     .then(response => response.json())
     .then(catalog => {
       const searchBar = document.getElementById("search-bar");
@@ -189,13 +189,6 @@ export function displayNews(objArr, divID) {
   const newsList = document.getElementById(divID)
 
   for (const article of objArr) {
-    // const tile = document.createElement("div")
-    // newsList.appendChild(tile)
-    // tile.setAttribute("class", "news-img")
-    // const img = document.createElement("img")
-    // tile.appendChild(img)
-    // img.setAttribute("src", article.urlToImage)
-
     const row = document.createElement("div")
     const anchor = document.createElement("a")
     const subTitle = document.createElement("p")
@@ -252,7 +245,7 @@ export function displayShopItems(objArr) {
 }
 
 export function mostImportantStories(newsObjArr, customArr, divID) {
-  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
+  fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/data/anime")
     .then(response => response.json())
     .then(catalog => {
       let count = 0

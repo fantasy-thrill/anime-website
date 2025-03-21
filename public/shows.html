@@ -80,7 +80,7 @@
   }
 
   try {
-    const response = await fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/series")
+    const response = await fetch("https://btahhmy7zl.execute-api.us-east-2.amazonaws.com/prod/data/anime")
     const catalog = await response.json()
 
     displayTitles(catalog)
