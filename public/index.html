@@ -74,19 +74,12 @@
         </div>
         <a href="./news.html" class="link" id="more-news-btn">More News</a>
       </section>
-      <section id="reviews-section">
-        <h2>Reviews of latest episodes</h2>
-        <hr>
-        <div id="episode-reviews">
-          <!-- Episode reviews go here -->
-        </div>
-      </section>
     </div>
   </main>
   <footer>
-    <p style="text-align: center;">Copyright &copy; 2024. All rights to series go to their respective licensors.</p>
+    <p style="text-align: center;">Copyright &copy; 2025. All rights to series go to their respective licensors.</p>
   </footer>
-  <script src="./config.js" type="module" ></script>
+  <!-- <script src="./config.js" type="module"></script> -->
   <script src="./functions.js" type="module"></script>
   <script type="module">
     import {
@@ -117,26 +110,18 @@
     }
 
     const topStories = []
-    const episodeReviews = []
 
     try {
       const envResponse = await fetch("/.netlify/functions/getEnv")
       const data = await envResponse.json()
 
-      let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" + 
-        "apiKey=" + data.NEWS_API_KEY
-      let req = new Request(url)
+      let url = "https://api.newsdatahub.com/v1/news?topic=anime&topic=manga&language=en"
+      let req = new Request(url, { headers: { "X-Api-Key": data.NEWS_API_KEY } })
 
       const response =  await fetch(req)
       const objArr = await response.json()
 
-      const isAReview = str => /Episode \d+$/.test(str)
-
-      const newsList = objArr.articles.filter(article => !isAReview(article.title))
-      const reviewList = objArr.articles.filter(article => isAReview(article.title))
-
-      mostImportantStories(newsList, topStories, "top-stories")
-      mostImportantStories(reviewList, episodeReviews, "episode-reviews")
+      mostImportantStories(objArr.data, topStories, "top-stories")
 
     } catch (error) {
       console.error("Error fetching new stories: ", error)

@@ -220,7 +220,6 @@ hr {
 #top-stories, #episode-reviews {
   margin: 50px 0;
   display: grid;
-  grid-template-columns: auto 1fr;
   row-gap: 20px;
   column-gap: 50px;
 }
@@ -261,7 +260,6 @@ hr {
 
 #news-stories {
   display: grid;
-  grid-template-columns: auto 1fr;
   gap: 30px;
   column-gap: 45px;
 }

@@ -145,9 +145,6 @@ export function displayFeaturedAnime(objArr, title) {
 
   for (const anime of objArr) {
     if (title.test(anime.name)) {
-      const heading = document.createElement("h3")
-      heading.textContent = anime.name
-
       const animeImg = document.createElement("img")
       animeImg.setAttribute("src", anime.horizontalImg)
       animeImg.setAttribute("alt", anime.name)
@@ -156,7 +153,7 @@ export function displayFeaturedAnime(objArr, title) {
       description.innerHTML = anime.description
 
       watchBtn.setAttribute("href", anime.url)
-      subsection.append(heading, animeImg, description)
+      subsection.append(animeImg, description)
     }
   }
 }
@@ -192,12 +189,12 @@ export function displayNews(objArr, divID) {
   const newsList = document.getElementById(divID)
 
   for (const article of objArr) {
-    const tile = document.createElement("div")
-    newsList.appendChild(tile)
-    tile.setAttribute("class", "news-img")
-    const img = document.createElement("img")
-    tile.appendChild(img)
-    img.setAttribute("src", article.urlToImage)
+    // const tile = document.createElement("div")
+    // newsList.appendChild(tile)
+    // tile.setAttribute("class", "news-img")
+    // const img = document.createElement("img")
+    // tile.appendChild(img)
+    // img.setAttribute("src", article.urlToImage)
 
     const row = document.createElement("div")
     const anchor = document.createElement("a")
@@ -206,23 +203,21 @@ export function displayNews(objArr, divID) {
 
     newsList.appendChild(row)
     row.setAttribute("class", "news-info")
-    anchor.setAttribute("href", article.url)
+    anchor.setAttribute("href", article.article_link)
     anchor.setAttribute("target", "_blank")
     anchor.setAttribute("class", "news-link")
     anchor.textContent = article.title
 
-    const symbolRegex = /\/\//
-    if (symbolRegex.test(article.description)) {
-      const slashes = article.description.match(symbolRegex)[0]
-      subTitle.textContent = article.description.substring(0, article.description.indexOf(slashes))
+    if (article.description.length === 0) {
+      subTitle.textContent = article.content.substring(0, 50) + "..."
+    } else if (article.description.length > 100) {
+      subTitle.textContent = article.description.substring(0, 100) + "..."
     } else {
       subTitle.textContent = article.description
     }
 
-    const theDay = article.publishedAt.match(/\d{4}-\d\d-\d\d/g)
-    const dateStr = theDay[0]
-    const newDateStr = new Date(dateStr)
-    const options = { month: "long", day: "numeric", year: "numeric" };
+    const newDateStr = new Date(article.pub_date)
+    const options = { weekday: "long", month: "long", day: "numeric", year: "numeric" }
     const formattedDate = newDateStr.toLocaleDateString("en-US", options);
     pubDate.textContent = formattedDate
     pubDate.style.fontStyle = "italic"

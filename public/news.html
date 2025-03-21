@@ -58,37 +58,30 @@
     </main>
     <footer>
       <p style="text-align: center; margin-top: 20px">
-        Copyright &copy;2022. All rights to series go to their respective licensors.
+        Copyright &copy;2025. All rights to series go to their respective licensors.
       </p>
     </footer>
   </body>
-  <script src="./config.js" type="module" ></script>
+  <!-- <script src="./config.js" type="module" ></script> -->
   <script src="./functions.js" type="module"></script>
   <script type="module">
     import { displayNews } from "./functions.js"
 
+    const envResponse = await fetch("/.netlify/functions/getEnv")
+    const data = await envResponse.json()
+
     const newsArticles = []
-    let url = "https://newsapi.org/v2/everything?" + "domains=animenewsnetwork.com&" + "language=en&" + 
-      "apiKey=" + window.env.NEWS_API_KEY
-    let req = new Request(url)
+    let url = "https://api.newsdatahub.com/v1/news?topic=anime&topic=manga&language=en"
+    let req = new Request(url, { headers: { "X-Api-Key": data.NEWS_API_KEY } })
 
     try {
       const response = await fetch(req)
       const objArr = await response.json()
 
-      let count = 0
-      for (const article of objArr.articles) {
-        if (
-          article.urlToImage !== "" && 
-          !/Episode \d+$/.test(article.title) && 
-          count < 10
-        ) {
-          newsArticles.push(article)
-          count++
-        }
+      for (const article of objArr.data) {
+        newsArticles.push(article)
       }
-      console.log(objArr)
-      console.log(newsArticles)
+      // console.log(objArr)
       displayNews(newsArticles, "news-stories")
 
     } catch (error) {
