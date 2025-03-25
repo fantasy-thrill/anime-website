@@ -201,7 +201,7 @@ export function displayNews(objArr, divID) {
     anchor.setAttribute("class", "news-link")
     anchor.textContent = article.title
 
-    if (article.description.length === 0) {
+    if (!article.description) {
       subTitle.textContent = article.content.substring(0, 50) + "..."
     } else if (article.description.length > 100) {
       subTitle.textContent = article.description.substring(0, 100) + "..."
