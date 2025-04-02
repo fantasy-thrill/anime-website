@@ -226,13 +226,13 @@ export function displayShopItems(objArr) {
     itemDiv.setAttribute("class", "item")
     collectionDiv.appendChild(itemDiv)
 
+    const imageDiv = document.createElement("div")
+    imageDiv.setAttribute("class", "item-image")
     const image = document.createElement("img")
     image.setAttribute("src", item.image)
     image.setAttribute("alt", item.name)
-    const mediaQuery = window.matchMedia("(max-width: 1100px)")
-    mediaQuery.addEventListener("change", event => 
-      image.style.width = event.matches ? "50%" : "40%"
-    )
+    image.style.width = "60%"
+    imageDiv.appendChild(image)
 
     const itemHeader = document.createElement("h4")
     itemHeader.textContent = item.name
@@ -240,7 +240,7 @@ export function displayShopItems(objArr) {
     const priceTag = document.createElement("h2")
     priceTag.textContent = "$" + item.price
 
-    itemDiv.append(image, itemHeader, priceTag)
+    itemDiv.append(imageDiv, itemHeader, priceTag)
   }
 }
 

@@ -284,6 +284,13 @@ hr {
   text-align: center;
 }
 
+.item-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 25em;
+}
+
 #product-search input {
   width: 20em;
   padding: 0.25em;
