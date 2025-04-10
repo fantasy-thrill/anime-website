@@ -443,7 +443,7 @@ form button:hover {
 }
 
 /* Stylesheet for smartphones */
-@media (max-width: 425px) {
+@media (max-width: 440px) {
   body {
     font-size: 10px;
   }
